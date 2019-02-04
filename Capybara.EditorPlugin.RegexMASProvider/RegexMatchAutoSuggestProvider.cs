@@ -85,7 +85,7 @@ namespace Capybara.EditorPlugin.RegexMASProvider
                     segmentPair.Source.AllSubItems.OfType<IText>()
                         .Aggregate(new StringBuilder(), (builder, it) => builder.Append(it.Properties.Text))
                         .ToString();
-                _candidates.AddRange(_regexPatternEntries.EvaluateMatches(text, _variables));
+                _candidates.AddRange(_regexPatternEntries.EvaluateMatches2(text, _variables));
             }
         }
 

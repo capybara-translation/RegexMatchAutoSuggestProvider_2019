@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using Capybara.EditorPlugin.RegexMASProvider.Common;
@@ -102,6 +103,92 @@ namespace Capybara.EditorPlugin.RegexMASProvider.Models
                 }
             }
             return results.Select(e => e).Distinct().ToList();
+        }
+
+
+        public List<string> EvaluateMatches2(string text, Variables variables)
+        {
+            var results = new List<string>();
+            if (!string.IsNullOrEmpty(text))
+            {
+                var validVariables = DistinctVariables(variables);
+                foreach (var pattern in Entries.Where(e => e.IsEnabled && !e.HasErrors))
+                {
+                    var finalRegex = ConstructFinalRegex(validVariables, pattern.RegexPattern);
+                    var regex = new Regex(finalRegex.ConcatenatedPattern);
+                    var cnt = 0;
+                    var newText = regex.Replace(text, match =>
+                    {
+                        cnt++;
+                        var groupNames = regex.GetGroupNames();
+                        var entireValue = match.Value;
+                        foreach (var groupName in groupNames.Skip(1))
+                        {
+                            // TODO: 数字グループも処理する
+                            var group = match.Groups[groupName];
+                            if (!group.Success || !finalRegex.VariableMap.ContainsKey(groupName))
+                            {
+                                continue;
+                            }
+                            var variable = finalRegex.VariableMap[groupName];
+
+                            var diff = 0;
+                            foreach (Capture capture in group.Captures)
+                            {
+                                var pair = variable.TranslationPairs.FirstOrDefault(x => !x.HasErrors && Regex.Escape(x.Source) == capture.Value);
+                                if (pair == null)
+                                {
+                                    continue;
+                                }
+
+                                var beforeLen = entireValue.Length;
+                                entireValue = entireValue.Remove(capture.Index - match.Index - diff, capture.Length);
+                                entireValue = entireValue.Insert(capture.Index - match.Index - diff, $"({pair.Target})");
+                                var afterLen = entireValue.Length;
+                                diff = beforeLen - afterLen;
+                            }
+                        }
+
+                        return Utils.WideToNarrow(entireValue.ToString());
+
+                    });
+                    results.Add(newText);
+
+                    results.AddRange(from Match match in Regex.Matches(text, pattern.RegexPattern)
+                                         select Utils.WideToNarrow(match.Result(pattern.ReplacePattern)));
+
+                }
+            }
+            return results.Select(e => e).Distinct().ToList();
+        }
+
+        private class FinalRegex
+        {
+            public string ConcatenatedPattern { get; set; }
+            public Dictionary<string, Variable> VariableMap { get; set; }
+        }
+
+
+        private FinalRegex ConstructFinalRegex(IEnumerable< Variable> variables, string basedPattern)
+        {
+            var finalRegex = new FinalRegex{
+                ConcatenatedPattern = basedPattern,
+                VariableMap = new Dictionary<string, Variable>()
+            };
+            
+            foreach (var variable in variables.Where(p => !p.HasErrors && p.IsEnabled))
+            {
+                if (!finalRegex.ConcatenatedPattern.Contains($"#{variable.Name}#"))
+                {
+                    continue;
+                }
+                var groupName = variable.Name;
+                var concatenatedSources = string.Join("|", variable.TranslationPairs.Where(p => !p.HasErrors).Select(p => Regex.Escape(p.Source)));
+                finalRegex.ConcatenatedPattern = finalRegex.ConcatenatedPattern.Replace($"#{variable.Name}#", $"(?<{groupName}>{concatenatedSources})");
+                finalRegex.VariableMap.Add(groupName, variable);
+            }
+
+            return finalRegex;
         }
 
         private List<Variable> DistinctVariables(Variables variables)

@@ -25,5 +25,11 @@ namespace Capybara.EditorPlugin.RegexMASProvider.Common
             return Regex.Replace(text, @"[０-９ａ-ｚＡ-Ｚ]",
                 m => Strings.StrConv(m.Value, VbStrConv.Narrow, 0x0411));
         }
+
+        public static bool IsNumber(this string s)
+        {
+            return int.TryParse(s, out _);
+        }
+        
     }
 }

@@ -72,7 +72,7 @@ namespace Capybara.EditorPlugin.RegexMASProvider
                 {
                     var variables = viewPartController.GetVariables();
                     suggestions.AddRange(
-                        regexPatternEntries.EvaluateMatches(text, variables).OrderByDescending(s => s.Length));
+                        regexPatternEntries.EvaluateMatches2(text, variables).OrderByDescending(s => s.Length));
                 })
                 .ContinueWith(_ =>
                 {

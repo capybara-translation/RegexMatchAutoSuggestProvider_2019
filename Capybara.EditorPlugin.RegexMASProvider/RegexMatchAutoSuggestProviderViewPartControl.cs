@@ -50,6 +50,8 @@ namespace Capybara.EditorPlugin.RegexMASProvider
             _listChangeNotifier.BindingSources.Add(regexPatternEntryBindingSource);
             _listChangeNotifier.BindingSources.Add(translationPairBindingSource);
             _listChangeNotifier.Start();
+
+            regexPatternsDataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
         }
 
         private void regexPatternsDataGridView_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
