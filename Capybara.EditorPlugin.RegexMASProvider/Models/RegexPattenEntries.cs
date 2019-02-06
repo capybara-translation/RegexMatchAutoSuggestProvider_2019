@@ -164,7 +164,7 @@ namespace Capybara.EditorPlugin.RegexMASProvider.Models
 
                 var variable = intermediateRegex.VariableMap[groupName];
                 var pair = variable.TranslationPairs.FirstOrDefault(x =>
-                    !x.HasErrors && x.Source == group.Value);
+                    !x.HasErrors && x.Source.ToLower() == group.Value.ToLower());
                 if (pair == null)
                 {
                     continue;
