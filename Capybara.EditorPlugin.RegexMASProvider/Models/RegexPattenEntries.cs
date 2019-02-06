@@ -173,7 +173,7 @@ namespace Capybara.EditorPlugin.RegexMASProvider.Models
                 {
                     continue;
                 }
-                finalMatchPattern = finalMatchPattern.ReplaceFirst($"(#{groupName}#)", $"({pair.Target})");
+                finalMatchPattern = finalMatchPattern.ReplaceFirst($"#{groupName}#", $"{pair.Target}");
 
                 var beforeLen = entireValue.Length;
                 entireValue = entireValue.Remove(group.Index - match.Index - diff, group.Length);
