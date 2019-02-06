@@ -99,11 +99,16 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CaretPositionUtils.cs" />
+    <Compile Include="View\AbstractControlDescriptionProvider.cs" />
+    <Compile Include="View\AbstractPopupUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CaretPositionUtils.cs" />
     <Compile Include="Common\ModelBase.cs" />
     <Compile Include="Common\Utils.cs" />
-    <Compile Include="ListChangeNotifier.cs" />
-    <Compile Include="Models\PopupWindowContent.cs" />
+    <Compile Include="Models\ListChangeNotifier.cs" />
+    <Compile Include="View\ConcreteClassAttribute.cs" />
+    <Compile Include="View\PopupWindowContent.cs" />
     <Compile Include="Models\RegexPattenEntries.cs" />
     <Compile Include="Models\RegexPatternEntry.cs" />
     <Compile Include="Models\TranslationPair.cs" />
@@ -114,11 +119,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PluginResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="PopupWindow.cs">
+    <Compile Include="View\SuggestionsPopupWindow.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PopupWindow.Designer.cs">
-      <DependentUpon>PopupWindow.cs</DependentUpon>
+    <Compile Include="View\SuggestionsPopupWindow.Designer.cs">
+      <DependentUpon>SuggestionsPopupWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\PluginProperties.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -131,7 +136,7 @@
     </Compile>
     <Compile Include="RegexMatchAutoSuggestProviderViewPartController.cs" />
     <Compile Include="ShowPopupAction.cs" />
-    <Compile Include="PopupToolStrip.cs" />
+    <Compile Include="View\PopupToolStripController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="PluginResources.resx">
@@ -152,8 +157,8 @@
     <None Include="Resources\R.ico" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="PopupWindow.resx">
-      <DependentUpon>PopupWindow.cs</DependentUpon>
+    <EmbeddedResource Include="View\SuggestionsPopupWindow.resx">
+      <DependentUpon>SuggestionsPopupWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RegexMatchAutoSuggestProviderViewPartControl.resx">
       <DependentUpon>RegexMatchAutoSuggestProviderViewPartControl.cs</DependentUpon>

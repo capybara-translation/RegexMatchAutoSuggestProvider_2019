@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Capybara.EditorPlugin.RegexMASProvider.Models;
+using Capybara.EditorPlugin.RegexMASProvider.View;
 using Sdl.Desktop.IntegrationApi;
 using Sdl.Desktop.IntegrationApi.Extensions;
 using Sdl.FileTypeSupport.Framework.BilingualApi;
@@ -20,11 +18,44 @@ namespace Capybara.EditorPlugin.RegexMASProvider
     [Shortcut(Keys.Control | Keys.Shift | Keys.F12)]
     public class ShowPopupAction : AbstractViewControllerAction<EditorController>
     {
-        private PopupToolStrip _popupToolStrip;
+        private PopupToolStripController _popupToolStrip;
+        private SuggestionsPopupWindow _suggestionsPopupWindow;
 
         public override void Initialize()
         {
-            _popupToolStrip = new PopupToolStrip();
+            _suggestionsPopupWindow = new SuggestionsPopupWindow();
+            _popupToolStrip = new PopupToolStripController(_suggestionsPopupWindow);
+            _suggestionsPopupWindow.CloseEventHandler += PopupWindow_CloseEventHandler;
+        }
+
+        private void PopupWindow_CloseEventHandler(object sender, System.EventArgs e)
+        {
+            var itemString = _suggestionsPopupWindow.GetSelectedItem();
+            _popupToolStrip.ToolStripDropDown.Close();
+            InsertItemString(itemString);
+        }
+
+        private void InsertItemString(string itemString)
+        {
+            var editorController = SdlTradosStudio.Application.GetController<EditorController>();
+            if (editorController == null)
+            {
+                return;
+            }
+            var doc = editorController.ActiveDocument;
+            if (doc == null)
+            {
+                return;
+            }
+            if (doc.Selection.Current is SourceSelection || doc.ActiveSegmentPair == null)
+            {
+                return;
+            }
+            if (!string.IsNullOrEmpty(itemString))
+            {
+                doc.Selection.Target.Replace(itemString, "Text inserted by Regex Match AutoSuggest Provider");
+                doc.Selection.Current.Collapse();
+            }
         }
 
         protected override void Execute()

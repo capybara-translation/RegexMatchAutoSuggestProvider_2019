@@ -1,6 +1,6 @@
-﻿namespace Capybara.EditorPlugin.RegexMASProvider
+﻿namespace Capybara.EditorPlugin.RegexMASProvider.View
 {
-    partial class PopupWindow
+    partial class SuggestionsPopupWindow
     {
         /// <summary> 
         /// 必要なデザイナー変数です。
@@ -36,21 +36,23 @@
             this.suggestionsListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.suggestionsListBox.FormattingEnabled = true;
             this.suggestionsListBox.HorizontalScrollbar = true;
-            this.suggestionsListBox.ItemHeight = 12;
+            this.suggestionsListBox.ItemHeight = 18;
             this.suggestionsListBox.Location = new System.Drawing.Point(0, 0);
+            this.suggestionsListBox.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.suggestionsListBox.Name = "suggestionsListBox";
-            this.suggestionsListBox.Size = new System.Drawing.Size(219, 113);
+            this.suggestionsListBox.Size = new System.Drawing.Size(365, 170);
             this.suggestionsListBox.TabIndex = 0;
             this.suggestionsListBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.suggestionsListBox_MouseDoubleClick);
             this.suggestionsListBox.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.suggestionsListBox_PreviewKeyDown);
             // 
-            // PopupWindow
+            // SuggestionsPopupWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.suggestionsListBox);
-            this.Name = "PopupWindow";
-            this.Size = new System.Drawing.Size(219, 113);
+            this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.Name = "SuggestionsPopupWindow";
+            this.Size = new System.Drawing.Size(365, 170);
             this.ResumeLayout(false);
 
         }

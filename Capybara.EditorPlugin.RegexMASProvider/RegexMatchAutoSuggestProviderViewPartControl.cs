@@ -1,5 +1,4 @@
 ﻿using System;
-using System.CodeDom;
 using System.ComponentModel;
 using System.Windows.Forms;
 using Capybara.EditorPlugin.RegexMASProvider.Models;

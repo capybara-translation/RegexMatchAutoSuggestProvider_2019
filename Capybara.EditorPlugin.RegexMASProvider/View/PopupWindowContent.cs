@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Capybara.EditorPlugin.RegexMASProvider.Models
+namespace Capybara.EditorPlugin.RegexMASProvider.View
 {
     public class PopupWindowContent
     {

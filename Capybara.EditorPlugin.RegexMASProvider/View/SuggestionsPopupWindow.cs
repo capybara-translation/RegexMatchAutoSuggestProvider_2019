@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
-using Capybara.EditorPlugin.RegexMASProvider.Models;
 
-namespace Capybara.EditorPlugin.RegexMASProvider
+namespace Capybara.EditorPlugin.RegexMASProvider.View
 {
-    public partial class PopupWindow : UserControl
+    public partial class SuggestionsPopupWindow : AbstractPopupUserControl
     {
-        public PopupWindow()
+        public SuggestionsPopupWindow()
         {
             InitializeComponent();
         }
 
         public event EventHandler CloseEventHandler;
 
-        public void SetContent(PopupWindowContent content)
+        public override void SetContent(PopupWindowContent content)
         {
             suggestionsListBox.Items.Clear();
             suggestionsListBox.Items.AddRange(content.Suggestions.ToArray<object>());
@@ -50,5 +49,6 @@ namespace Capybara.EditorPlugin.RegexMASProvider
                 CloseEventHandler(sender, e);
             }
         }
+
     }
 }
