@@ -125,8 +125,12 @@ namespace Capybara.EditorPlugin.RegexMASProvider.Models
                     foreach (Match match in Regex.Matches(text, intermediateRegex.RealPattern, RegexOptions.IgnoreCase))
                     {
                         var finalRegex = ConstructFinalRegex(match, intermediateRegex);
-                        var res = Regex.Replace(finalRegex.NewSourceText, finalRegex.Pattern, pattern.ReplacePattern, RegexOptions.IgnoreCase);
-                        results.Add(res.WideToNarrow());
+                        foreach (Match finalMatch in Regex.Matches(finalRegex.NewSourceText, finalRegex.Pattern, RegexOptions.IgnoreCase))
+                        {
+                            results.Add(finalMatch.Result(pattern.ReplacePattern).WideToNarrow());
+                        }
+                        //var res = Regex.Replace(finalRegex.NewSourceText, finalRegex.Pattern, pattern.ReplacePattern, RegexOptions.IgnoreCase);
+                        //results.Add(res.WideToNarrow());
                     }
 
                     results.AddRange(from Match match in Regex.Matches(text, pattern.RegexPattern)
@@ -164,7 +168,7 @@ namespace Capybara.EditorPlugin.RegexMASProvider.Models
 
                 var variable = intermediateRegex.VariableMap[groupName];
                 var pair = variable.TranslationPairs.FirstOrDefault(x =>
-                    !x.HasErrors && x.Source.ToLower() == group.Value.ToLower());
+                    !x.HasErrors && x.Source == group.Value);
                 if (pair == null)
                 {
                     continue;
