@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -62,17 +63,15 @@ namespace Capybara.EditorPlugin.RegexMASProvider
                 return;
             }
 
-            var text =
-                segmentPair.Source.AllSubItems.OfType<IText>()
-                    .Aggregate(new StringBuilder(), (builder, it) => builder.Append(it.Properties.Text))
-                    .ToString();
+            // TODO: 正規表現も見せる
+            var text = string.Join("", segmentPair.Source.AllSubItems.OfType<IText>().Select(txt => txt.Properties.Text));
             var suggestions = new List<string>();
             Task.Factory.StartNew(
                 () =>
                 {
                     var variables = viewPartController.GetVariables();
                     suggestions.AddRange(
-                        regexPatternEntries.EvaluateMatches2(text, variables).OrderByDescending(s => s.Length));
+                        regexPatternEntries.GetAutoSuggestEntries(text, variables).OrderByDescending(s => s.Length));
                 })
                 .ContinueWith(_ =>
                 {

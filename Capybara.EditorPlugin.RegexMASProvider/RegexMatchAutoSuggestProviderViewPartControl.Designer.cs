@@ -30,25 +30,24 @@
         {
             this.components = new System.ComponentModel.Container();
             this.regexPatternsDataGridView = new System.Windows.Forms.DataGridView();
-            this.isEnabledDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.regexPatternDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.replacePatternDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.regexPatternEntryBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.mainTabControl = new System.Windows.Forms.TabControl();
             this.regexEntriesPage = new System.Windows.Forms.TabPage();
             this.variablesPage = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.variablesDataGridView = new System.Windows.Forms.DataGridView();
+            this.translationPairsDataGridView = new System.Windows.Forms.DataGridView();
+            this.isEnabledDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.regexPatternDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.regexPatternEntryBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.isEnabledDataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.variableBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.translationPairsDataGridView = new System.Windows.Forms.DataGridView();
             this.sourceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.targetDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.translationPairBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.regexPatternsDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.regexPatternEntryBindingSource)).BeginInit();
             this.mainTabControl.SuspendLayout();
             this.regexEntriesPage.SuspendLayout();
             this.variablesPage.SuspendLayout();
@@ -57,8 +56,9 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.variablesDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.variableBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.translationPairsDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.regexPatternEntryBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.variableBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.translationPairBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,37 +81,11 @@
             this.regexPatternsDataGridView.TabIndex = 0;
             this.regexPatternsDataGridView.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.regexPatternsDataGridView_PreviewKeyDown);
             // 
-            // isEnabledDataGridViewCheckBoxColumn
-            // 
-            this.isEnabledDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.isEnabledDataGridViewCheckBoxColumn.DataPropertyName = "IsEnabled";
-            this.isEnabledDataGridViewCheckBoxColumn.Frozen = true;
-            this.isEnabledDataGridViewCheckBoxColumn.HeaderText = "Enabled";
-            this.isEnabledDataGridViewCheckBoxColumn.Name = "isEnabledDataGridViewCheckBoxColumn";
-            this.isEnabledDataGridViewCheckBoxColumn.Width = 55;
-            // 
-            // descriptionDataGridViewTextBoxColumn
-            // 
-            this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
-            this.descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
-            this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
-            // 
-            // regexPatternDataGridViewTextBoxColumn
-            // 
-            this.regexPatternDataGridViewTextBoxColumn.DataPropertyName = "RegexPattern";
-            this.regexPatternDataGridViewTextBoxColumn.HeaderText = "Regex Pattern";
-            this.regexPatternDataGridViewTextBoxColumn.Name = "regexPatternDataGridViewTextBoxColumn";
-            // 
             // replacePatternDataGridViewTextBoxColumn
             // 
             this.replacePatternDataGridViewTextBoxColumn.DataPropertyName = "ReplacePattern";
             this.replacePatternDataGridViewTextBoxColumn.HeaderText = "Replace Pattern";
             this.replacePatternDataGridViewTextBoxColumn.Name = "replacePatternDataGridViewTextBoxColumn";
-            // 
-            // regexPatternEntryBindingSource
-            // 
-            this.regexPatternEntryBindingSource.DataSource = typeof(Capybara.EditorPlugin.RegexMASProvider.Models.RegexPatternEntry);
-            this.regexPatternEntryBindingSource.AddingNew += new System.ComponentModel.AddingNewEventHandler(this.regexPatternEntryBindingSource_AddingNew);
             // 
             // mainTabControl
             // 
@@ -180,6 +154,49 @@
             this.variablesDataGridView.TabIndex = 0;
             this.variablesDataGridView.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.variablesDataGridView_PreviewKeyDown);
             // 
+            // translationPairsDataGridView
+            // 
+            this.translationPairsDataGridView.AutoGenerateColumns = false;
+            this.translationPairsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.translationPairsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.translationPairsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.sourceDataGridViewTextBoxColumn,
+            this.targetDataGridViewTextBoxColumn});
+            this.translationPairsDataGridView.DataSource = this.translationPairBindingSource;
+            this.translationPairsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.translationPairsDataGridView.Location = new System.Drawing.Point(0, 0);
+            this.translationPairsDataGridView.Name = "translationPairsDataGridView";
+            this.translationPairsDataGridView.RowTemplate.Height = 21;
+            this.translationPairsDataGridView.Size = new System.Drawing.Size(522, 307);
+            this.translationPairsDataGridView.TabIndex = 0;
+            this.translationPairsDataGridView.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.translationPairsDataGridView_PreviewKeyDown);
+            // 
+            // isEnabledDataGridViewCheckBoxColumn
+            // 
+            this.isEnabledDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.isEnabledDataGridViewCheckBoxColumn.DataPropertyName = "IsEnabled";
+            this.isEnabledDataGridViewCheckBoxColumn.Frozen = true;
+            this.isEnabledDataGridViewCheckBoxColumn.HeaderText = "Enabled";
+            this.isEnabledDataGridViewCheckBoxColumn.Name = "isEnabledDataGridViewCheckBoxColumn";
+            this.isEnabledDataGridViewCheckBoxColumn.Width = 55;
+            // 
+            // descriptionDataGridViewTextBoxColumn
+            // 
+            this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
+            this.descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
+            this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
+            // 
+            // regexPatternDataGridViewTextBoxColumn
+            // 
+            this.regexPatternDataGridViewTextBoxColumn.DataPropertyName = "RegexPattern";
+            this.regexPatternDataGridViewTextBoxColumn.HeaderText = "Regex Pattern";
+            this.regexPatternDataGridViewTextBoxColumn.Name = "regexPatternDataGridViewTextBoxColumn";
+            // 
+            // regexPatternEntryBindingSource
+            // 
+            this.regexPatternEntryBindingSource.DataSource = typeof(Capybara.EditorPlugin.RegexMASProvider.Models.RegexPatternEntry);
+            this.regexPatternEntryBindingSource.AddingNew += new System.ComponentModel.AddingNewEventHandler(this.regexPatternEntryBindingSource_AddingNew);
+            // 
             // isEnabledDataGridViewCheckBoxColumn1
             // 
             this.isEnabledDataGridViewCheckBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -199,23 +216,6 @@
             // 
             this.variableBindingSource.DataSource = typeof(Capybara.EditorPlugin.RegexMASProvider.Models.Variable);
             this.variableBindingSource.AddingNew += new System.ComponentModel.AddingNewEventHandler(this.variableBindingSource_AddingNew);
-            // 
-            // translationPairsDataGridView
-            // 
-            this.translationPairsDataGridView.AutoGenerateColumns = false;
-            this.translationPairsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.translationPairsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.translationPairsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.sourceDataGridViewTextBoxColumn,
-            this.targetDataGridViewTextBoxColumn});
-            this.translationPairsDataGridView.DataSource = this.translationPairBindingSource;
-            this.translationPairsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.translationPairsDataGridView.Location = new System.Drawing.Point(0, 0);
-            this.translationPairsDataGridView.Name = "translationPairsDataGridView";
-            this.translationPairsDataGridView.RowTemplate.Height = 21;
-            this.translationPairsDataGridView.Size = new System.Drawing.Size(522, 307);
-            this.translationPairsDataGridView.TabIndex = 0;
-            this.translationPairsDataGridView.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.translationPairsDataGridView_PreviewKeyDown);
             // 
             // sourceDataGridViewTextBoxColumn
             // 
@@ -244,7 +244,6 @@
             this.Name = "RegexMatchAutoSuggestProviderViewPartControl";
             this.Size = new System.Drawing.Size(803, 341);
             ((System.ComponentModel.ISupportInitialize)(this.regexPatternsDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.regexPatternEntryBindingSource)).EndInit();
             this.mainTabControl.ResumeLayout(false);
             this.regexEntriesPage.ResumeLayout(false);
             this.variablesPage.ResumeLayout(false);
@@ -253,8 +252,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.variablesDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.variableBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.translationPairsDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.regexPatternEntryBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.variableBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.translationPairBindingSource)).EndInit();
             this.ResumeLayout(false);
 

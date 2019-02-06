@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using Capybara.EditorPlugin.RegexMASProvider.Models;
 using Sdl.FileTypeSupport.Framework.BilingualApi;
 using Sdl.TranslationStudioAutomation.IntegrationApi;
@@ -81,11 +80,9 @@ namespace Capybara.EditorPlugin.RegexMASProvider
             var segmentPair = ActiveSegmentPair;
             if (segmentPair != null)
             {
-                var text =
-                    segmentPair.Source.AllSubItems.OfType<IText>()
-                        .Aggregate(new StringBuilder(), (builder, it) => builder.Append(it.Properties.Text))
-                        .ToString();
-                _candidates.AddRange(_regexPatternEntries.EvaluateMatches2(text, _variables));
+                var text = string.Join("",
+                    segmentPair.Source.AllSubItems.OfType<IText>().Select(txt => txt.Properties.Text));
+                _candidates.AddRange(_regexPatternEntries.GetAutoSuggestEntries(text, _variables));
             }
         }
 
@@ -118,12 +115,12 @@ namespace Capybara.EditorPlugin.RegexMASProvider
         {
             if (Settings.Enabled)
             {
-                string suffix = context.GetAllPrefixes().FirstOrDefault();
-                if (!string.IsNullOrEmpty(suffix) && _candidates != null && _candidates.Count > 0)
+                string prefix = context.GetAllPrefixes().FirstOrDefault();
+                if (!string.IsNullOrEmpty(prefix) && _candidates != null && _candidates.Count > 0)
                 {
                     return _candidates.Where(
                         item =>
-                            item.StartsWith(suffix,
+                            item.StartsWith(prefix,
                                 Settings.CaseSensitive
                                     ? StringComparison.InvariantCulture
                                     : StringComparison.InvariantCultureIgnoreCase)).Select(

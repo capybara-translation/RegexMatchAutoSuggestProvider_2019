@@ -20,7 +20,7 @@ namespace Capybara.EditorPlugin.RegexMASProvider.Common
             return Path.Combine(path, name + fileNameSuffix);
         }
 
-        public static string WideToNarrow(string text)
+        public static string WideToNarrow(this string text)
         {
             return Regex.Replace(text, @"[０-９ａ-ｚＡ-Ｚ]",
                 m => Strings.StrConv(m.Value, VbStrConv.Narrow, 0x0411));

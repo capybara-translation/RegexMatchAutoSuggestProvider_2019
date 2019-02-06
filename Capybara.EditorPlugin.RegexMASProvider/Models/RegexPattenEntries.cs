@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using Capybara.EditorPlugin.RegexMASProvider.Common;
@@ -80,12 +79,13 @@ namespace Capybara.EditorPlugin.RegexMASProvider.Models
             get { return null; }
         }
 
+        [Obsolete("This method is obsolete. Use GetAutoSuggestEntries method, which handles multiple variables correctly.")]
         public List<string> EvaluateMatches(string text, Variables variables)
         {
             var results = new List<string>();
             if (!string.IsNullOrEmpty(text))
             {
-                var validVariables = DistinctVariables(variables);
+                var validVariables = variables.ToDistinct();
                 foreach (var pattern in Entries.Where(e => e.IsEnabled && !e.HasErrors))
                 {
                     var pairPatterns = GetTranslationPairPatterns(validVariables, pattern.RegexPattern);
@@ -107,114 +107,98 @@ namespace Capybara.EditorPlugin.RegexMASProvider.Models
         }
 
 
-        public List<string> EvaluateMatches2(string text, Variables variables)
+        /// <summary>
+        /// Evaluates regex patterns and variables and return AutoSuggest entries. 
+        /// </summary>
+        /// <param name="text">Source text</param>
+        /// <param name="variables">Variables</param>
+        /// <returns>AutoSuggest entries</returns>
+        public List<string> GetAutoSuggestEntries(string text, Variables variables)
         {
             var results = new List<string>();
             if (!string.IsNullOrEmpty(text))
             {
-                var validVariables = DistinctVariables(variables);
+                var validVariables = variables.ToDistinct();
                 foreach (var pattern in Entries.Where(e => e.IsEnabled && !e.HasErrors))
                 {
                     var intermediateRegex = ConstructIntermediateRegex(validVariables, pattern.RegexPattern);
-                    foreach (Match match in Regex.Matches(text, intermediateRegex.RealPattern))
+                    foreach (Match match in Regex.Matches(text, intermediateRegex.RealPattern, RegexOptions.IgnoreCase))
                     {
-                        var finalPatterns = ConstructFinalRegex(match.Value, intermediateRegex, pattern.ReplacePattern);
-                        var res = match.Result(finalPatterns.Item2);
-                        results.Add(res);
-
+                        var finalRegex = ConstructFinalRegex(match, intermediateRegex);
+                        var res = Regex.Replace(finalRegex.NewSourceText, finalRegex.Pattern, pattern.ReplacePattern, RegexOptions.IgnoreCase);
+                        results.Add(res.WideToNarrow());
                     }
-                    //var finalRegex = new Regex(finalPattern);
-                    //var newText = finalRegex.Replace(text, match =>
-                    //{
-
-                    //    var groupNames = finalRegex.GetGroupNames();
-                    //    var entireValue = match.Value;
-                    //    var ss = match.Result(pattern.ReplacePattern);
-                    //    foreach (var groupName in groupNames.SkipWhile(g => g.IsNumber()))
-                    //    {
-                    //        var group = match.Groups[groupName];
-                    //        if (!@group.Success || !intermediateRegex.VariableMap.ContainsKey(groupName))
-                    //        {
-                    //            continue;
-                    //        }
-
-                    //        var variable = intermediateRegex.VariableMap[groupName];
-
-                    //        var diff = 0;
-                    //        foreach (Capture capture in @group.Captures)
-                    //        {
-                    //            var pair = variable.TranslationPairs.FirstOrDefault(x =>
-                    //                !x.HasErrors && Regex.Escape(x.Source) == capture.Value);
-                    //            if (pair == null)
-                    //            {
-                    //                continue;
-                    //            }
-
-                    //            var beforeLen = entireValue.Length;
-                    //            entireValue = entireValue.Remove(capture.Index - match.Index - diff, capture.Length);
-                    //            entireValue = entireValue.Insert(capture.Index - match.Index - diff, $"({pair.Target})");
-                    //            var afterLen = entireValue.Length;
-                    //            diff = beforeLen - afterLen;
-                    //        }
-                    //    }
-
-                    //    return entireValue;
-                    //});
-
 
                     results.AddRange(from Match match in Regex.Matches(text, pattern.RegexPattern)
-                                         select Utils.WideToNarrow(match.Result(pattern.ReplacePattern)));
+                                         select match.Result(pattern.ReplacePattern).WideToNarrow());
 
                 }
             }
             return results.Select(e => e).Distinct().ToList();
         }
 
-        private Tuple<string, string> ConstructFinalRegex(string text, IntermediateRegex intermediateRegex, string replacePattern)
+        private class FinalRegex
         {
-            var regex = new Regex(intermediateRegex.RealPattern);
-            var finalMatchPattern = intermediateRegex.NumberedPattern;
-            var finalReplacePattern = replacePattern;
-            regex.Replace(text, match =>
-            {
-                var processedGroupCount = 0;
-                var groups = match.Groups;
-                for (var i  = 1; i < groups.Count; i++)
-                {
-                    var group = groups[i];
-                    var groupName = group.Name;
-                    if (groupName.IsNumber())
-                    {
-                        processedGroupCount++;
-                        continue;
-                    }
-                    if (!group.Success || !intermediateRegex.VariableMap.ContainsKey(groupName))
-                    {
-                        continue;
-                    }
+            public string Pattern { get; set; }
+            public string NewSourceText { get; set; }
+        }
 
-                    var variable = intermediateRegex.VariableMap[groupName];
-                    var pair = variable.TranslationPairs.FirstOrDefault(x =>
-                        !x.HasErrors && Regex.Escape(x.Source) == group.Value);
-                    if (pair == null)
-                    {
-                        continue;
-                    }
-                    finalMatchPattern = finalMatchPattern.ReplaceFirst($"(#{groupName}#)", $"(?<{groupName}>{group.Value})");
-                    var groupNum = regex.GroupNumberFromName(groupName) - processedGroupCount;
-                    finalReplacePattern = finalReplacePattern.Replace($"${groupNum}", pair.Target);
-                    processedGroupCount--;
+        private FinalRegex  ConstructFinalRegex(Match match, IntermediateRegex intermediateRegex)
+        {
+            var entireValue = match.Value;
+            var finalMatchPattern = intermediateRegex.NumberedPattern;
+            var groups = match.Groups;
+            var diff = 0;
+            for (int i = 1; i < groups.Count; i++)
+            {
+                var group = groups[i];
+                var groupName = group.Name;
+                if (groupName.IsNumber())
+                {
+                    continue;
+                }
+                if (!group.Success || !intermediateRegex.VariableMap.ContainsKey(groupName))
+                {
+                    continue;
                 }
 
-                return match.Value;
-            });
-            return Tuple.Create(finalMatchPattern, finalReplacePattern);
+                var variable = intermediateRegex.VariableMap[groupName];
+                var pair = variable.TranslationPairs.FirstOrDefault(x =>
+                    !x.HasErrors && x.Source == group.Value);
+                if (pair == null)
+                {
+                    continue;
+                }
+                finalMatchPattern = finalMatchPattern.ReplaceFirst($"(#{groupName}#)", $"({pair.Target})");
+
+                var beforeLen = entireValue.Length;
+                entireValue = entireValue.Remove(group.Index - match.Index - diff, group.Length);
+                entireValue = entireValue.Insert(group.Index - match.Index - diff, $"{pair.Target}");
+                var afterLen = entireValue.Length;
+                diff = beforeLen - afterLen;
+            }
+
+
+            return new FinalRegex
+            {
+                Pattern = finalMatchPattern,
+                NewSourceText = entireValue
+            };
+
         }
 
         private class IntermediateRegex
         {
             public string RealPattern { get; set; }
+
+            /// <summary>
+            /// Used to construct a final regex pattern.
+            /// </summary>
             public string NumberedPattern { get; set; }
+
+            /// <summary>
+            /// Name to Variable Mapping. Name is suffixed with a unique index.
+            /// </summary>
             public Dictionary<string, Variable> VariableMap { get; set; }
         }
 
@@ -246,19 +230,6 @@ namespace Capybara.EditorPlugin.RegexMASProvider.Models
             return finalRegex;
         }
 
-        private List<Variable> DistinctVariables(Variables variables)
-        {
-            var list = new List<Variable>();
-            foreach (var variable in variables.Entries.Where(e => e.IsEnabled && !e.HasErrors))
-            {
-                if (list.Count == 0 || list.All(e => e.Name != variable.Name))
-                {
-                    list.Add(variable);
-                }
-            }
-            return list;
-        }
-
         private List<TranslationPairPattern> GetTranslationPairPatterns(List<Variable> variables, string regexPattern)
         {
             var list = new List<TranslationPairPattern>();
@@ -271,10 +242,6 @@ namespace Capybara.EditorPlugin.RegexMASProvider.Models
                 }
                 foreach (var pair in variable.TranslationPairs.Where(p => !p.HasErrors))
                 {
-                    //var findPattern = regexPattern.Replace(varname,
-                    //    string.Format("(?<{0}>{1})", variable.Name, Regex.Escape(pair.Source)));
-                    //var replacePattern = regexPattern.Replace(varname,
-                    //    string.Format("(?<{0}>{1})", variable.Name, Regex.Escape(pair.Target)));
                     var findPattern = regexPattern.Replace(varname,
                         string.Format("(?:{0})", Regex.Escape(pair.Source)));
                     var replacePattern = regexPattern.Replace(varname,

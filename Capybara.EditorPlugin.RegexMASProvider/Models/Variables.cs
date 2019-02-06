@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
@@ -85,6 +86,19 @@ namespace Capybara.EditorPlugin.RegexMASProvider.Models
                                             new XElement("Source", p.Source),
                                             new XElement("Target", p.Target)))))))));
             doc.Save(path);
+        }
+
+        public List<Variable> ToDistinct()
+        {
+            var variables = new List<Variable>();
+            foreach (var variable in Entries.Where(e => e.IsEnabled && !e.HasErrors))
+            {
+                if (variables.Count == 0 || variables.All(e => e.Name != variable.Name))
+                {
+                    variables.Add(variable);
+                }
+            }
+            return variables;
         }
     }
 }

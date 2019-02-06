@@ -52,6 +52,8 @@ namespace Capybara.EditorPlugin.RegexMASProvider
             _listChangeNotifier.Start();
 
             regexPatternsDataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            variablesDataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            translationPairsDataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
         }
 
         private void regexPatternsDataGridView_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
