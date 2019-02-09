@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Capybara.EditorPlugin.RegexMASProvider.Models;
 using Capybara.EditorPlugin.RegexMASProvider.View;
 using Sdl.Desktop.IntegrationApi;
 using Sdl.Desktop.IntegrationApi.Extensions;
@@ -11,26 +12,27 @@ using Sdl.TranslationStudioAutomation.IntegrationApi.Presentation.DefaultLocatio
 
 namespace Capybara.EditorPlugin.RegexMASProvider
 {
-    [Action("RegexMASProviderAction", typeof (EditorController), Name = "RegexMASProviderAction_Name",
-        Description = "RegexMASProviderAction_Description", Icon = "RegexMASProvider_Icon")]
+    [Action("SuggestionsPopupWindowAction", typeof (EditorController), Name = "SuggestionsPopupWindowAction_Name",
+        Description = "SuggestionsPopupWindowAction_Description", Icon = "RegexMASProvider_Icon")]
     [ActionLayout(typeof (TranslationStudioDefaultContextMenus.EditorDocumentContextMenuLocation), 1, DisplayType.Large)
     ]
     [Shortcut(Keys.Control | Keys.Shift | Keys.F12)]
-    public class ShowPopupAction : AbstractViewControllerAction<EditorController>
+    public class SuggestionsPopupWindowAction : AbstractViewControllerAction<EditorController>
     {
         private PopupToolStripController _popupToolStrip;
-        private SuggestionsPopupWindow _suggestionsPopupWindow;
+        private SuggestionsPopupWindow _popupWindow;
 
         public override void Initialize()
         {
-            _suggestionsPopupWindow = new SuggestionsPopupWindow();
-            _popupToolStrip = new PopupToolStripController(_suggestionsPopupWindow);
-            _suggestionsPopupWindow.CloseEventHandler += PopupWindow_CloseEventHandler;
+            _popupWindow = new SuggestionsPopupWindow();
+            _popupToolStrip = new PopupToolStripController(_popupWindow);
+            _popupWindow.CloseEventHandler += PopupWindow_CloseEventHandler;
+            base.Initialize();
         }
 
         private void PopupWindow_CloseEventHandler(object sender, System.EventArgs e)
         {
-            var itemString = _suggestionsPopupWindow.GetSelectedItem();
+            var itemString = _popupWindow.GetSelectedItem();
             _popupToolStrip.ToolStripDropDown.Close();
             InsertItemString(itemString);
         }
@@ -88,28 +90,31 @@ namespace Capybara.EditorPlugin.RegexMASProvider
                 return;
             }
 
-            var activeProcess = CaretPositionUtils.GetActiveProcess();
+            var activeProcess = CaretPosition.GetActiveProcess();
             if (activeProcess != "SDLTradosStudio")
             {
                 return;
             }
 
-            // TODO: 正規表現も見せる
             var text = string.Join("", segmentPair.Source.AllSubItems.OfType<IText>().Select(txt => txt.Properties.Text));
-            var suggestions = new List<string>();
-            Task.Factory.StartNew(
+            Task<List<AutoSuggestEntry>>.Factory.StartNew(
                 () =>
                 {
                     var variables = viewPartController.GetVariables();
-                    suggestions.AddRange(
-                        regexPatternEntries.GetAutoSuggestEntries(text, variables).OrderByDescending(s => s.Length));
+                    //var suggestions = new List<string>();
+                    //suggestions.AddRange(
+                    //    regexPatternEntries.GetAutoSuggestEntries(text, variables)
+                    //        .Select(e => e.AutoSuggestString)
+                    //        .Distinct()
+                    //        .OrderByDescending(s => s.Length));
+                    return regexPatternEntries.GetAutoSuggestEntries(text, variables);
                 })
-                .ContinueWith(_ =>
+                .ContinueWith(task => 
                 {
-                    if (suggestions.Count > 0)
+                    if (task.Result.Count > 0)
                     {
-                        var content = new PopupWindowContent { Suggestions = suggestions };
-                        var caretPosition = CaretPositionUtils.GetCaretPosition();
+                        var content = new PopupWindowContent(task.Result);
+                        var caretPosition = CaretPosition.EvaluateCarePosition();
                         _popupToolStrip.Show(caretPosition, content);
                     }
                 }, TaskScheduler.FromCurrentSynchronizationContext());

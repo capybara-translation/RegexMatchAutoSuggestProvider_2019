@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Capybara.EditorPlugin.RegexMASProvider {
+namespace Capybara.EditorPlugin.RegexMASProvider.Properties {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Capybara.EditorPlugin.RegexMASProvider {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class PluginResources {
+    internal class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal PluginResources() {
+        internal Resources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Capybara.EditorPlugin.RegexMASProvider {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Capybara.EditorPlugin.RegexMASProvider.PluginResources", typeof(PluginResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Capybara.EditorPlugin.RegexMASProvider.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,66 +61,43 @@ namespace Capybara.EditorPlugin.RegexMASProvider {
         }
         
         /// <summary>
-        ///   Show regex evaluation list に類似しているローカライズされた文字列を検索します。
+        ///   @charset &quot;UTF-8&quot;;
+        ///
+        ///body {
+        ///	font-family:&apos;Segoe UI&apos;;
+        ///	font-size: 70%;
+        ///}
+        ///
+        ///.matched {
+        ///    background:#ff8000;
+        ///    border-color:darkgray;
+        ///    border-radius:0.2em;
+        ///    box-shadow:1px 1px 1px gray;
+        ///} に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string EvaluationPopupWindowAction_Description {
+        internal static string BaseCss {
             get {
-                return ResourceManager.GetString("EvaluationPopupWindowAction_Description", resourceCulture);
+                return ResourceManager.GetString("BaseCss", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Show Regex Evaluation List に類似しているローカライズされた文字列を検索します。
+        ///   &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+        ///&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; xml:lang=&quot;en&quot;&gt;
+        ///&lt;head&gt;
+        ///    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html;charset=UTF-8&quot;/&gt;
+        ///    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge, chrome=1&quot; /&gt;
+        ///	&lt;link rel=&quot;stylesheet&quot; href=&quot;base.css&quot; type=&quot;text/css&quot; charset=&quot;UTF-8&quot; /&gt;
+        ///	&lt;title&gt;Sample&lt;/title&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;
+        ///    &lt;table&gt;
+        ///         [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string EvaluationPopupWindowAction_Name {
+        internal static string BaseHtml {
             get {
-                return ResourceManager.GetString("EvaluationPopupWindowAction_Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   AutoSuggest provider for copying the source words that match the specified regular expressions に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string Plugin_Description {
-            get {
-                return ResourceManager.GetString("Plugin_Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Regex Match AutoSuggest Provider に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string Plugin_Name {
-            get {
-                return ResourceManager.GetString("Plugin_Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   (アイコン) に類似した型 System.Drawing.Icon のローカライズされたリソースを検索します。
-        /// </summary>
-        internal static System.Drawing.Icon RegexMASProvider_Icon {
-            get {
-                object obj = ResourceManager.GetObject("RegexMASProvider_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Show all regex-matched suggestions に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string SuggestionsPopupWindowAction_Description {
-            get {
-                return ResourceManager.GetString("SuggestionsPopupWindowAction_Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Show Regex Match Suggestions に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string SuggestionsPopupWindowAction_Name {
-            get {
-                return ResourceManager.GetString("SuggestionsPopupWindowAction_Name", resourceCulture);
+                return ResourceManager.GetString("BaseHtml", resourceCulture);
             }
         }
     }

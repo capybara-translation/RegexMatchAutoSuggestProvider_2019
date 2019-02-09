@@ -82,7 +82,8 @@ namespace Capybara.EditorPlugin.RegexMASProvider
             {
                 var text = string.Join("",
                     segmentPair.Source.AllSubItems.OfType<IText>().Select(txt => txt.Properties.Text));
-                _candidates.AddRange(_regexPatternEntries.GetAutoSuggestEntries(text, _variables));
+                var autoSuggestEntries = _regexPatternEntries.GetAutoSuggestEntries(text, _variables); 
+                _candidates.AddRange(autoSuggestEntries.Select(e => e.AutoSuggestString).Distinct());
             }
         }
 

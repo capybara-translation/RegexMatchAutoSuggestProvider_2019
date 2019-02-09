@@ -113,44 +113,59 @@ namespace Capybara.EditorPlugin.RegexMASProvider.Models
         /// <param name="text">Source text</param>
         /// <param name="variables">Variables</param>
         /// <returns>AutoSuggest entries</returns>
-        public List<string> GetAutoSuggestEntries(string text, Variables variables)
+        public List<AutoSuggestEntry> GetAutoSuggestEntries(string text, Variables variables)
         {
             var results = new List<string>();
+            var autoSuggestEntries = new List<AutoSuggestEntry>();
             if (!string.IsNullOrEmpty(text))
             {
                 var validVariables = variables.ToDistinct();
                 foreach (var pattern in Entries.Where(e => e.IsEnabled && !e.HasErrors))
                 {
                     var intermediateRegex = ConstructIntermediateRegex(validVariables, pattern.RegexPattern);
-                    foreach (Match match in Regex.Matches(text, intermediateRegex.RealPattern, RegexOptions.IgnoreCase))
+                    foreach (Match initialMatch in Regex.Matches(text, intermediateRegex.ConcatenatedFindPattern, RegexOptions.IgnoreCase))
                     {
-                        var finalRegex = ConstructFinalRegex(match, intermediateRegex);
-                        foreach (Match finalMatch in Regex.Matches(finalRegex.NewSourceText, finalRegex.Pattern, RegexOptions.IgnoreCase))
+                        var finalRegex = ConstructFinalRegex(initialMatch, intermediateRegex);
+                        foreach (Match finalMatch in Regex.Matches(finalRegex.NewSourceText, finalRegex.EvaluatedFindPattern, RegexOptions.IgnoreCase))
                         {
-                            results.Add(finalMatch.Result(pattern.ReplacePattern).WideToNarrow());
+                            var autoSuggestString = finalMatch.Result(pattern.ReplacePattern).WideToNarrow();
+                            results.Add(autoSuggestString);
+                            var autoSuggestEntry = new AutoSuggestEntry
+                            {
+                                OriginalSourceText = text,
+                                OriginalFindPattern = pattern.RegexPattern,
+                                OriginalReplacePattern = pattern.ReplacePattern,
+                                NumberedFindPattern = intermediateRegex.NumberedFindPattern,
+                                ConcatenatedFindPattern = intermediateRegex.ConcatenatedFindPattern,
+                                ConcatenatedFindPatternMatch = initialMatch,
+                                EvaluatedFindPattern = finalRegex.EvaluatedFindPattern,
+                                EvaluatedFindPatternMatch = finalMatch,
+                                NewSourceText = finalRegex.NewSourceText,
+                                AutoSuggestString = autoSuggestString,
+                            };
+                            autoSuggestEntries.Add(autoSuggestEntry);
                         }
-                        //var res = Regex.Replace(finalRegex.NewSourceText, finalRegex.Pattern, pattern.ReplacePattern, RegexOptions.IgnoreCase);
-                        //results.Add(res.WideToNarrow());
                     }
 
-                    results.AddRange(from Match match in Regex.Matches(text, pattern.RegexPattern)
-                                         select match.Result(pattern.ReplacePattern).WideToNarrow());
+                    //results.AddRange(from Match match in Regex.Matches(text, pattern.RegexPattern)
+                    //                     select match.Result(pattern.ReplacePattern).WideToNarrow());
 
                 }
             }
-            return results.Select(e => e).Distinct().ToList();
+            //return results.Select(e => e).Distinct().ToList();
+            return autoSuggestEntries;
         }
 
         private class FinalRegex
         {
-            public string Pattern { get; set; }
+            public string EvaluatedFindPattern { get; set; }
             public string NewSourceText { get; set; }
         }
 
         private FinalRegex  ConstructFinalRegex(Match match, IntermediateRegex intermediateRegex)
         {
             var entireValue = match.Value;
-            var finalMatchPattern = intermediateRegex.NumberedPattern;
+            var finalMatchPattern = intermediateRegex.NumberedFindPattern;
             var groups = match.Groups;
             var diff = 0;
             for (int i = 1; i < groups.Count; i++)
@@ -185,7 +200,7 @@ namespace Capybara.EditorPlugin.RegexMASProvider.Models
 
             return new FinalRegex
             {
-                Pattern = finalMatchPattern,
+                EvaluatedFindPattern = finalMatchPattern,
                 NewSourceText = entireValue
             };
 
@@ -193,12 +208,12 @@ namespace Capybara.EditorPlugin.RegexMASProvider.Models
 
         private class IntermediateRegex
         {
-            public string RealPattern { get; set; }
+            public string ConcatenatedFindPattern { get; set; }
 
             /// <summary>
             /// Used to construct a final regex pattern.
             /// </summary>
-            public string NumberedPattern { get; set; }
+            public string NumberedFindPattern { get; set; }
 
             /// <summary>
             /// Name to Variable Mapping. Name is suffixed with a unique index.
@@ -209,9 +224,9 @@ namespace Capybara.EditorPlugin.RegexMASProvider.Models
 
         private IntermediateRegex ConstructIntermediateRegex(IEnumerable< Variable> variables, string basedPattern)
         {
-            var finalRegex = new IntermediateRegex{
-                RealPattern = basedPattern,
-                NumberedPattern = basedPattern,
+            var intermediateRegex = new IntermediateRegex{
+                ConcatenatedFindPattern = basedPattern,
+                NumberedFindPattern = basedPattern,
                 VariableMap = new Dictionary<string, Variable>()
             };
 
@@ -219,19 +234,19 @@ namespace Capybara.EditorPlugin.RegexMASProvider.Models
             {
 
                 var idx = 0;
-                while (finalRegex.RealPattern.Contains($"#{variable.Name}#"))
+                while (intermediateRegex.ConcatenatedFindPattern.Contains($"#{variable.Name}#"))
                 {
                     var groupName = $"{variable.Name}{idx}";
                     var concatenatedSources = string.Join("|", variable.TranslationPairs.Where(p => !p.HasErrors).Select(p => Regex.Escape(p.Source)));
-                    finalRegex.RealPattern = finalRegex.RealPattern.ReplaceFirst($"#{variable.Name}#", $"(?<{groupName}>{concatenatedSources})");
-                    finalRegex.NumberedPattern =
-                        finalRegex.NumberedPattern.ReplaceFirst($"#{variable.Name}#", $"#{groupName}#");
-                    finalRegex.VariableMap.Add(groupName, variable);
+                    intermediateRegex.ConcatenatedFindPattern = intermediateRegex.ConcatenatedFindPattern.ReplaceFirst($"#{variable.Name}#", $"(?<{groupName}>{concatenatedSources})");
+                    intermediateRegex.NumberedFindPattern =
+                        intermediateRegex.NumberedFindPattern.ReplaceFirst($"#{variable.Name}#", $"#{groupName}#");
+                    intermediateRegex.VariableMap.Add(groupName, variable);
                     idx++;
                 }
             }
 
-            return finalRegex;
+            return intermediateRegex;
         }
 
         private List<TranslationPairPattern> GetTranslationPairPatterns(List<Variable> variables, string regexPattern)

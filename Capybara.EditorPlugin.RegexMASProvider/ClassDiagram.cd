@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Capybara.EditorPlugin.RegexMASProvider.Common.ModelBase" Collapsed="true">
+    <Position X="8.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAQAAKAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common\ModelBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Capybara.EditorPlugin.RegexMASProvider.Common.Utils" Collapsed="true">
+    <Position X="8.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAEAACAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Common\Utils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Capybara.EditorPlugin.RegexMASProvider.RegexMatchAutoSuggestProvider" Collapsed="true">
+    <Position X="5" Y="3.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AIAIAAAAAAAAAAAAQAIAAAQQAAAFAAAAAAQAAiAAAAA=</HashCode>
+      <FileName>RegexMatchAutoSuggestProvider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Capybara.EditorPlugin.RegexMASProvider.Models.AutoSuggestEntry" Collapsed="true">
+    <Position X="21.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQCgAAAAAQAIAAgAAAAAAAQAACAAAAAAAAAIAAAEA=</HashCode>
+      <FileName>Models\AutoSuggestEntry.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Capybara.EditorPlugin.RegexMASProvider.Models.ListChangeNotifier" Collapsed="true">
+    <Position X="19.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAASAAAAACBAAAAAAAAABAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Models\ListChangeNotifier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Capybara.EditorPlugin.RegexMASProvider.Models.RegexPattenEntries" Collapsed="true">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAgIAAAAAAASkAAAAQAAAEAAAACAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Models\RegexPattenEntries.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Capybara.EditorPlugin.RegexMASProvider.Models.RegexPatternEntry" Collapsed="true">
+    <Position X="15" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAIAggQAEAAEAAAAAAAAAAAAIAAAAAAAAEAg=</HashCode>
+      <FileName>Models\RegexPatternEntry.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Capybara.EditorPlugin.RegexMASProvider.Models.TranslationPair" Collapsed="true">
+    <Position X="17.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAkAAAQAAAAAAACAAQAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Models\TranslationPair.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Capybara.EditorPlugin.RegexMASProvider.Models.Variable" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgIAAAAIAAAQAAAAEAAAQAQAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Variable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Capybara.EditorPlugin.RegexMASProvider.Models.Variables" Collapsed="true">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgIAAAAAAASEAAAAQAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Variables.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Capybara.EditorPlugin.RegexMASProvider.PluginResources" Collapsed="true">
+    <Position X="21.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAABBEAAAAQAIAAAAAAAAAAICAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Capybara.EditorPlugin.RegexMASProvider.RegexMatchAutoSuggestProviderViewPartControl" Collapsed="true">
+    <Position X="19.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RIABwAQkSCIAACSAAACCAAACAgARAQAQAAQKEwwDAAA=</HashCode>
+      <FileName>RegexMatchAutoSuggestProviderViewPartControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Capybara.EditorPlugin.RegexMASProvider.RegexMatchAutoSuggestProviderViewPartController" Collapsed="true">
+    <Position X="21.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEIAACAQAAAAAAAAAAAAAAAAAAEAAAAAAAQAA=</HashCode>
+      <FileName>RegexMatchAutoSuggestProviderViewPartController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Capybara.EditorPlugin.RegexMASProvider.ShowPopupAction" Collapsed="true">
+    <Position X="23.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAQQAAAAAAAAAAAAACAAAAAAAAAACEAA=</HashCode>
+      <FileName>ShowPopupAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Capybara.EditorPlugin.RegexMASProvider.View.AbstractControlDescriptionProvider&lt;TAbstract, TBase&gt;" Collapsed="true">
+    <Position X="19.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>View\AbstractControlDescriptionProvider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Capybara.EditorPlugin.RegexMASProvider.View.AbstractPopupUserControl" Collapsed="true">
+    <Position X="1.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\AbstractPopupUserControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Capybara.EditorPlugin.RegexMASProvider.View.CaretPosition" Collapsed="true">
+    <Position X="23.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAABAAAAAAAAAAAIAAAAACAACAAAAAAAEAI=</HashCode>
+      <FileName>View\CaretPosition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Capybara.EditorPlugin.RegexMASProvider.View.ConcreteClassAttribute" Collapsed="true">
+    <Position X="25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>View\ConcreteClassAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Capybara.EditorPlugin.RegexMASProvider.View.EvaluationPopupWindow" Collapsed="true">
+    <Position X="0.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACIAAAAAAACAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\EvaluationPopupWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Capybara.EditorPlugin.RegexMASProvider.View.PopupToolStripController" Collapsed="true">
+    <Position X="23.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAQAAgAAAAAAAAEAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>View\PopupToolStripController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Capybara.EditorPlugin.RegexMASProvider.View.PopupWindowContent" Collapsed="true">
+    <Position X="25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\PopupWindowContent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Capybara.EditorPlugin.RegexMASProvider.View.SuggestionsPopupWindow" Collapsed="true">
+    <Position X="2.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACICAAAAAACAAAACAAAAAAAAAAACAYAAAAA=</HashCode>
+      <FileName>View\SuggestionsPopupWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Yu Gothic UI" Size="9" />
+</ClassDiagram>

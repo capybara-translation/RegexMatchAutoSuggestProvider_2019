@@ -4,11 +4,10 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
-using System.Windows.Forms;
 
 namespace Capybara.EditorPlugin.RegexMASProvider.View
 {
-    public static class CaretPositionUtils
+    public static class CaretPosition
     {
         # region Data Members & Structures
         [StructLayout(LayoutKind.Sequential)]    // Required by user32.dll
@@ -33,10 +32,6 @@ namespace Capybara.EditorPlugin.RegexMASProvider.View
             public IntPtr hwndCaret;
             public RECT rcCaret;
         };
-
-        //Point startPosition = new Point();       // Point required for ToolTip movement by Mouse
-        //GUITHREADINFO guiInfo;                     // To store GUI Thread Information
-        //Point caretPosition;                     // To store Caret Position
         # endregion
 
         # region DllImports
@@ -59,14 +54,12 @@ namespace Capybara.EditorPlugin.RegexMASProvider.View
         /*- Converts window specific point to screen specific -*/
         [DllImport("user32.dll")]
         public static extern bool ClientToScreen(IntPtr hWnd, out Point position);
-
-        [DllImport("user32.dll")]
-        public static extern IntPtr SetFocus(IntPtr hWnd);
-
-        [DllImport("user32.dll")]
-        public static extern IntPtr SetForegroundWindow(IntPtr hWnd);
         # endregion
 
+        /// <summary>
+        /// Retrieves name of active Process.
+        /// </summary>
+        /// <returns>Active Process Name</returns>
         public static string GetActiveProcess()
         {
             const int nChars = 256;
@@ -86,10 +79,15 @@ namespace Capybara.EditorPlugin.RegexMASProvider.View
             return String.Empty;
         }
 
-        public static Point GetCaretPosition()
+        /// <summary>
+        /// Evaluates Cursor Position with respect to client screen.
+        /// </summary>
+        public static Point EvaluateCarePosition()
         {
             var guiInfo = new GUITHREADINFO();
             guiInfo.cbSize = (uint) Marshal.SizeOf(guiInfo);
+
+            // Get GuiThreadInfo into guiInfo
             GetGUIThreadInfo(0, out guiInfo);
             
             var caretPosition = new Point();
@@ -100,32 +98,5 @@ namespace Capybara.EditorPlugin.RegexMASProvider.View
 
             return caretPosition;
         }
-
-        public static FocusedControlData GetFocusedControlData()
-        {
-            var guiInfo = new GUITHREADINFO();
-            guiInfo.cbSize = (uint)Marshal.SizeOf(guiInfo);
-            GetGUIThreadInfo(0, out guiInfo);
-
-            var caretPosition = new Point();
-            caretPosition.X = (int)guiInfo.rcCaret.Left;
-            caretPosition.Y = (int)guiInfo.rcCaret.Bottom;
-
-            Control control = null;
-            var handle = guiInfo.hwndFocus;
-            if (handle != IntPtr.Zero)
-            {
-                control = Control.FromHandle(handle);
-            }
-
-
-            return new FocusedControlData {CaretPosition = caretPosition, FocusedControl = control};
-        }
-    }
-
-    public class FocusedControlData
-    {
-        public Point CaretPosition { get; set; }
-        public Control FocusedControl { get; set; }
     }
 }

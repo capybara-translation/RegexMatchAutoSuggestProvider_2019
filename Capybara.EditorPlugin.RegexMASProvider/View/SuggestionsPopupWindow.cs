@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace Capybara.EditorPlugin.RegexMASProvider.View
 {
-    public partial class SuggestionsPopupWindow : AbstractPopupUserControl
+    public partial class SuggestionsPopupWindow : BasePopupUserControl
     {
         public SuggestionsPopupWindow()
         {
@@ -16,7 +16,11 @@ namespace Capybara.EditorPlugin.RegexMASProvider.View
         public override void SetContent(PopupWindowContent content)
         {
             suggestionsListBox.Items.Clear();
-            suggestionsListBox.Items.AddRange(content.Suggestions.ToArray<object>());
+            suggestionsListBox.Items.AddRange(content.AutoSuggestEntries
+                .Select(e => e.AutoSuggestString)
+                .Distinct()
+                .OrderByDescending(s => s.Length)
+                .ToArray<object>());
             if (suggestionsListBox.Items.Count > 0)
             {
                 suggestionsListBox.SelectedIndex = 0;

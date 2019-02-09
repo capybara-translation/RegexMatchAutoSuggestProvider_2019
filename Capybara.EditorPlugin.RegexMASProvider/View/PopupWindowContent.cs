@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Capybara.EditorPlugin.RegexMASProvider.Models;
 
 namespace Capybara.EditorPlugin.RegexMASProvider.View
 {
@@ -6,8 +7,14 @@ namespace Capybara.EditorPlugin.RegexMASProvider.View
     {
         public PopupWindowContent()
         {
-            Suggestions = new List<string>();
+            AutoSuggestEntries = new List<AutoSuggestEntry>();
         }
-        public List<string> Suggestions { get; set; } 
+
+        public PopupWindowContent(IEnumerable<AutoSuggestEntry> autoSuggestEntries)
+        {
+            AutoSuggestEntries = new List<AutoSuggestEntry>(autoSuggestEntries);
+        }
+
+        public List<AutoSuggestEntry> AutoSuggestEntries { get; set; } 
     }
 }

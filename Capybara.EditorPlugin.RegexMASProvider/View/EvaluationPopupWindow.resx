@@ -117,26 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="EvaluationPopupWindowAction_Description" xml:space="preserve">
-    <value>Show regex evaluation list</value>
-  </data>
-  <data name="EvaluationPopupWindowAction_Name" xml:space="preserve">
-    <value>Show Regex Evaluation List</value>
-  </data>
-  <data name="Plugin_Description" xml:space="preserve">
-    <value>AutoSuggest provider for copying the source words that match the specified regular expressions</value>
-  </data>
-  <data name="Plugin_Name" xml:space="preserve">
-    <value>Regex Match AutoSuggest Provider</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="RegexMASProvider_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\R.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SuggestionsPopupWindowAction_Description" xml:space="preserve">
-    <value>Show all regex-matched suggestions</value>
-  </data>
-  <data name="SuggestionsPopupWindowAction_Name" xml:space="preserve">
-    <value>Show Regex Match Suggestions</value>
-  </data>
 </root>

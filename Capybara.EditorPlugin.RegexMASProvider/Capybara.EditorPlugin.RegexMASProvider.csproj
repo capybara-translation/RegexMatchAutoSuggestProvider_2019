@@ -99,15 +99,26 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="View\AbstractControlDescriptionProvider.cs" />
-    <Compile Include="View\AbstractPopupUserControl.cs">
+    <Compile Include="EvaluationPopupWindowAction.cs" />
+    <Compile Include="Models\AutoSuggestEntry.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="View\BasePopupUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="View\CaretPositionUtils.cs" />
+    <Compile Include="View\CaretPosition.cs" />
     <Compile Include="Common\ModelBase.cs" />
     <Compile Include="Common\Utils.cs" />
     <Compile Include="Models\ListChangeNotifier.cs" />
-    <Compile Include="View\ConcreteClassAttribute.cs" />
+    <Compile Include="View\EvaluationPopupWindow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\EvaluationPopupWindow.Designer.cs">
+      <DependentUpon>EvaluationPopupWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\PopupWindowContent.cs" />
     <Compile Include="Models\RegexPattenEntries.cs" />
     <Compile Include="Models\RegexPatternEntry.cs" />
@@ -135,8 +146,9 @@
       <DependentUpon>RegexMatchAutoSuggestProviderViewPartControl.cs</DependentUpon>
     </Compile>
     <Compile Include="RegexMatchAutoSuggestProviderViewPartController.cs" />
-    <Compile Include="ShowPopupAction.cs" />
+    <Compile Include="SuggestionsPopupWindowAction.cs" />
     <Compile Include="View\PopupToolStripController.cs" />
+    <Compile Include="View\Xhtml.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="PluginResources.resx">
@@ -147,6 +159,9 @@
     <Content Include="pluginpackage.manifest.xml">
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Resources\base.css" />
+    <None Include="Resources\base.html" />
+    <None Include="ClassDiagram.cd" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -157,6 +172,13 @@
     <None Include="Resources\R.ico" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\EvaluationPopupWindow.resx">
+      <DependentUpon>EvaluationPopupWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\SuggestionsPopupWindow.resx">
       <DependentUpon>SuggestionsPopupWindow.cs</DependentUpon>
     </EmbeddedResource>

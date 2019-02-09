@@ -5,11 +5,11 @@ namespace Capybara.EditorPlugin.RegexMASProvider.View
 {
     public class PopupToolStripController
     {
-        public AbstractPopupUserControl PopupWindow { get; }
+        public BasePopupUserControl PopupWindow { get; }
         public ToolStripControlHost ToolStripControlHost { get; }
         public ToolStripDropDown ToolStripDropDown { get; }
 
-        public PopupToolStripController(AbstractPopupUserControl popupUserControl)
+        public PopupToolStripController(BasePopupUserControl popupUserControl)
         {
             ToolStripDropDown = new ToolStripDropDown
             {

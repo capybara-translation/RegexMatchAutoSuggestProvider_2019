@@ -36,23 +36,24 @@
             this.suggestionsListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.suggestionsListBox.FormattingEnabled = true;
             this.suggestionsListBox.HorizontalScrollbar = true;
-            this.suggestionsListBox.ItemHeight = 18;
+            this.suggestionsListBox.ItemHeight = 25;
             this.suggestionsListBox.Location = new System.Drawing.Point(0, 0);
-            this.suggestionsListBox.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.suggestionsListBox.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.suggestionsListBox.Name = "suggestionsListBox";
-            this.suggestionsListBox.Size = new System.Drawing.Size(365, 170);
+            this.suggestionsListBox.Size = new System.Drawing.Size(365, 236);
             this.suggestionsListBox.TabIndex = 0;
             this.suggestionsListBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.suggestionsListBox_MouseDoubleClick);
             this.suggestionsListBox.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.suggestionsListBox_PreviewKeyDown);
             // 
             // SuggestionsPopupWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.suggestionsListBox);
-            this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.Name = "SuggestionsPopupWindow";
-            this.Size = new System.Drawing.Size(365, 170);
+            this.Size = new System.Drawing.Size(365, 236);
             this.ResumeLayout(false);
 
         }
