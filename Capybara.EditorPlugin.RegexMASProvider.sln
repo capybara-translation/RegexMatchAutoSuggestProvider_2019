@@ -1,9 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capybara.EditorPlugin.RegexMASProvider", "Capybara.EditorPlugin.RegexMASProvider\Capybara.EditorPlugin.RegexMASProvider.csproj", "{B0084C6F-4870-4FCC-89CC-61CED10A20DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegexMASProviderLib", "RegexMASProviderLib\RegexMASProviderLib.csproj", "{A1FA06AF-716F-49E6-9EAB-9345FA0EDA88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegexMASProviderLibTestApp", "RegexMASProviderLibTestApp\RegexMASProviderLibTestApp.csproj", "{435CAB55-F388-472F-B14E-00BC80886486}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capybara.EditorPlugin.RegexMASPRovider_2017", "Capybara.EditorPlugin.RegexMASPRovider_2017\Capybara.EditorPlugin.RegexMASPRovider_2017.csproj", "{F089A8CF-4338-48A4-9C45-6A1DCCFF9190}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +21,23 @@ Global
 		{B0084C6F-4870-4FCC-89CC-61CED10A20DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0084C6F-4870-4FCC-89CC-61CED10A20DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0084C6F-4870-4FCC-89CC-61CED10A20DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1FA06AF-716F-49E6-9EAB-9345FA0EDA88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1FA06AF-716F-49E6-9EAB-9345FA0EDA88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1FA06AF-716F-49E6-9EAB-9345FA0EDA88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1FA06AF-716F-49E6-9EAB-9345FA0EDA88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{435CAB55-F388-472F-B14E-00BC80886486}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{435CAB55-F388-472F-B14E-00BC80886486}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{435CAB55-F388-472F-B14E-00BC80886486}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{435CAB55-F388-472F-B14E-00BC80886486}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F089A8CF-4338-48A4-9C45-6A1DCCFF9190}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F089A8CF-4338-48A4-9C45-6A1DCCFF9190}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F089A8CF-4338-48A4-9C45-6A1DCCFF9190}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F089A8CF-4338-48A4-9C45-6A1DCCFF9190}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C9C67F0F-BAF7-46EE-8A5B-8EEBE1EF0EB7}
 	EndGlobalSection
 EndGlobal

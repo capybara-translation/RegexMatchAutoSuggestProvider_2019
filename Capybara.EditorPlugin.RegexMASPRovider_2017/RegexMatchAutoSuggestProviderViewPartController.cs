@@ -5,7 +5,7 @@ using Sdl.Desktop.IntegrationApi;
 using Sdl.Desktop.IntegrationApi.Extensions;
 using Sdl.TranslationStudioAutomation.IntegrationApi;
 
-namespace Capybara.EditorPlugin.RegexMASProvider
+namespace Capybara.EditorPlugin.RegexMASPRovider_2017
 {
     [ViewPart(
         Id = "RegexMatchAutoSuggestProviderViewPart",

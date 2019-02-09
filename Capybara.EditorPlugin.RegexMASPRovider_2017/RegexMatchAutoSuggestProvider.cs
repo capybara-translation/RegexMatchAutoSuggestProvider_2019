@@ -8,7 +8,7 @@ using Sdl.TranslationStudioAutomation.IntegrationApi;
 using Sdl.TranslationStudioAutomation.IntegrationApi.AutoSuggest;
 using Sdl.TranslationStudioAutomation.IntegrationApi.Extensions;
 
-namespace Capybara.EditorPlugin.RegexMASProvider
+namespace Capybara.EditorPlugin.RegexMASPRovider_2017
 {
     [AutoSuggestProvider(Id = "RegexMatchAutoSuggestProvider", Name = "RegexMatchAutoSuggestProvider",
         Description = "AutoSuggest provider for copying the source words that match the specified regular expressions",

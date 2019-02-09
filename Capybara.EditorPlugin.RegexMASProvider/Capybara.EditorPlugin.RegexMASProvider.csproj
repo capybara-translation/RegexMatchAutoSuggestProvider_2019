@@ -100,41 +100,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EvaluationPopupWindowAction.cs" />
-    <Compile Include="Models\AutoSuggestEntry.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="View\BasePopupUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\CaretPosition.cs" />
-    <Compile Include="Common\ModelBase.cs" />
-    <Compile Include="Common\Utils.cs" />
-    <Compile Include="Models\ListChangeNotifier.cs" />
-    <Compile Include="View\EvaluationPopupWindow.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\EvaluationPopupWindow.Designer.cs">
-      <DependentUpon>EvaluationPopupWindow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\PopupWindowContent.cs" />
-    <Compile Include="Models\RegexPattenEntries.cs" />
-    <Compile Include="Models\RegexPatternEntry.cs" />
-    <Compile Include="Models\TranslationPair.cs" />
-    <Compile Include="Models\Variable.cs" />
-    <Compile Include="Models\Variables.cs" />
     <Compile Include="PluginResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PluginResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="View\SuggestionsPopupWindow.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\SuggestionsPopupWindow.Designer.cs">
-      <DependentUpon>SuggestionsPopupWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\PluginProperties.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -147,8 +121,6 @@
     </Compile>
     <Compile Include="RegexMatchAutoSuggestProviderViewPartController.cs" />
     <Compile Include="SuggestionsPopupWindowAction.cs" />
-    <Compile Include="View\PopupToolStripController.cs" />
-    <Compile Include="View\Xhtml.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="PluginResources.resx">
@@ -159,9 +131,6 @@
     <Content Include="pluginpackage.manifest.xml">
       <SubType>Designer</SubType>
     </Content>
-    <None Include="Resources\base.css" />
-    <None Include="Resources\base.html" />
-    <None Include="ClassDiagram.cd" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -175,18 +144,18 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\EvaluationPopupWindow.resx">
-      <DependentUpon>EvaluationPopupWindow.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\SuggestionsPopupWindow.resx">
-      <DependentUpon>SuggestionsPopupWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="RegexMatchAutoSuggestProviderViewPartControl.resx">
       <DependentUpon>RegexMatchAutoSuggestProviderViewPartControl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\RegexMASProviderLib\RegexMASProviderLib.csproj">
+      <Project>{a1fa06af-716f-49e6-9eab-9345fa0eda88}</Project>
+      <Name>RegexMASProviderLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <CreatePluginPackage>true</CreatePluginPackage>
   </PropertyGroup>

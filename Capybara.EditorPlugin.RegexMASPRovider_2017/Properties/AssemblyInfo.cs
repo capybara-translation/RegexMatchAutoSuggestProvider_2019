@@ -1,15 +1,16 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Capybara.EditorPlugin.RegexMASProvider")]
+[assembly: AssemblyTitle("Capybara.EditorPlugin.RegexMASPRovider_2017")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Capybara.EditorPlugin.RegexMASProvider")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyProduct("Capybara.EditorPlugin.RegexMASPRovider_2017")]
+[assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -19,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("ca2cbbe4-f233-45d2-ab45-7759e1312067")]
+[assembly: Guid("f089a8cf-4338-48a4-9c45-6a1dccff9190")]
 
 // Version information for an assembly consists of the following four values:
 //

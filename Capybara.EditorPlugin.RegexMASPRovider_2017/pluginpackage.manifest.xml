@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <PluginPackage xmlns="http://www.sdl.com/Plugins/PluginPackage/1.0">
   <PlugInName>Capybara.EditorPlugin.RegexMASProvider</PlugInName>
   <Version>1.6</Version>
   <Description>Capybara.EditorPlugin.RegexMASProvider</Description>
   <Author>Capybara Translation</Author>
-  <RequiredProduct name="SDLTradosStudio" minversion="15.0" />  
+  <RequiredProduct name="SDLTradosStudio" minversion="11.0" maxversion="15.0" />
   <Include>
     <File>RegexMASProviderLib.dll</File>
   </Include>

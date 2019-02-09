@@ -1,4 +1,4 @@
-﻿namespace Capybara.EditorPlugin.RegexMASProvider
+﻿namespace Capybara.EditorPlugin.RegexMASPRovider_2017
 {
     partial class RegexMatchAutoSuggestProviderViewPartControl
     {

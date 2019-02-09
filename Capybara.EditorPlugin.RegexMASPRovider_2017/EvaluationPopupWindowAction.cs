@@ -10,7 +10,7 @@ using Sdl.FileTypeSupport.Framework.BilingualApi;
 using Sdl.TranslationStudioAutomation.IntegrationApi;
 using Sdl.TranslationStudioAutomation.IntegrationApi.Presentation.DefaultLocations;
 
-namespace Capybara.EditorPlugin.RegexMASProvider
+namespace Capybara.EditorPlugin.RegexMASPRovider_2017
 {
     [Action("EvaluationPopupWindowAction", typeof (EditorController), Name = "EvaluationPopupWindowAction_Name",
         Description = "EvaluationPopupWindowAction_Description", Icon = "RegexMASProvider_Icon")]

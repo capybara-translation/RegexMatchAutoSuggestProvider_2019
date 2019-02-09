@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Capybara.EditorPlugin.RegexMASProvider.Properties {
+namespace RegexMASProviderLib.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Capybara.EditorPlugin.RegexMASProvider.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Capybara.EditorPlugin.RegexMASProvider.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RegexMASProviderLib.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,47 @@ namespace Capybara.EditorPlugin.RegexMASProvider.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   @charset &quot;UTF-8&quot;;
+        ///
+        ///body {
+        ///	font-family:&apos;Segoe UI&apos;;
+        ///	font-size: 70%;
+        ///}
+        ///
+        ///.matched {
+        ///    background:#ff8000;
+        ///    border-color:darkgray;
+        ///    border-radius:0.2em;
+        ///    box-shadow:1px 1px 1px gray;
+        ///} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string BaseCss {
+            get {
+                return ResourceManager.GetString("BaseCss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+        ///&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; xml:lang=&quot;en&quot;&gt;
+        ///&lt;head&gt;
+        ///    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html;charset=UTF-8&quot;/&gt;
+        ///    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge, chrome=1&quot; /&gt;
+        ///	&lt;link rel=&quot;stylesheet&quot; href=&quot;base.css&quot; type=&quot;text/css&quot; charset=&quot;UTF-8&quot; /&gt;
+        ///	&lt;title&gt;Sample&lt;/title&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;
+        ///    &lt;table&gt;
+        ///         [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string BaseHtml {
+            get {
+                return ResourceManager.GetString("BaseHtml", resourceCulture);
             }
         }
     }

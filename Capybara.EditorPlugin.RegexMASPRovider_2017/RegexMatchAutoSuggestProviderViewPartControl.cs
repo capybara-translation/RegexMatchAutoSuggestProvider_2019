@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using RegexMASProviderLib.Models;
 using Sdl.TranslationStudioAutomation.IntegrationApi;
 
-namespace Capybara.EditorPlugin.RegexMASProvider
+namespace Capybara.EditorPlugin.RegexMASPRovider_2017
 {
     public partial class RegexMatchAutoSuggestProviderViewPartControl : UserControl
     {

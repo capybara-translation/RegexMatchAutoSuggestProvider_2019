@@ -10,29 +10,54 @@ using Sdl.FileTypeSupport.Framework.BilingualApi;
 using Sdl.TranslationStudioAutomation.IntegrationApi;
 using Sdl.TranslationStudioAutomation.IntegrationApi.Presentation.DefaultLocations;
 
-namespace Capybara.EditorPlugin.RegexMASProvider
+namespace Capybara.EditorPlugin.RegexMASPRovider_2017
 {
-    [Action("EvaluationPopupWindowAction", typeof (EditorController), Name = "EvaluationPopupWindowAction_Name",
-        Description = "EvaluationPopupWindowAction_Description", Icon = "RegexMASProvider_Icon")]
+    [Action("SuggestionsPopupWindowAction", typeof (EditorController), Name = "SuggestionsPopupWindowAction_Name",
+        Description = "SuggestionsPopupWindowAction_Description", Icon = "RegexMASProvider_Icon")]
     [ActionLayout(typeof (TranslationStudioDefaultContextMenus.EditorDocumentContextMenuLocation), 1, DisplayType.Large)
     ]
-    [Shortcut(Keys.Control | Keys.Shift | Keys.F11)]
-    public class EvaluationPopupWindowAction : AbstractViewControllerAction<EditorController>
+    [Shortcut(Keys.Control | Keys.Shift | Keys.F12)]
+    public class SuggestionsPopupWindowAction : AbstractViewControllerAction<EditorController>
     {
         private PopupToolStripController _popupToolStrip;
-        private EvaluationPopupWindow _popupWindow;
+        private SuggestionsPopupWindow _popupWindow;
 
         public override void Initialize()
         {
-            _popupWindow = new EvaluationPopupWindow();
+            _popupWindow = new SuggestionsPopupWindow();
             _popupToolStrip = new PopupToolStripController(_popupWindow);
-            _popupWindow.CloseEventHandler += _popupWindow_CloseEventHandler;
+            _popupWindow.CloseEventHandler += PopupWindow_CloseEventHandler;
             base.Initialize();
         }
 
-        private void _popupWindow_CloseEventHandler(object sender, System.EventArgs e)
+        private void PopupWindow_CloseEventHandler(object sender, System.EventArgs e)
         {
+            var itemString = _popupWindow.GetSelectedItem();
             _popupToolStrip.ToolStripDropDown.Close();
+            InsertItemString(itemString);
+        }
+
+        private void InsertItemString(string itemString)
+        {
+            var editorController = SdlTradosStudio.Application.GetController<EditorController>();
+            if (editorController == null)
+            {
+                return;
+            }
+            var doc = editorController.ActiveDocument;
+            if (doc == null)
+            {
+                return;
+            }
+            if (doc.Selection.Current is SourceSelection || doc.ActiveSegmentPair == null)
+            {
+                return;
+            }
+            if (!string.IsNullOrEmpty(itemString))
+            {
+                doc.Selection.Target.Replace(itemString, "Text inserted by Regex Match AutoSuggest Provider");
+                doc.Selection.Current.Collapse();
+            }
         }
 
         protected override void Execute()
@@ -76,6 +101,12 @@ namespace Capybara.EditorPlugin.RegexMASProvider
                 () =>
                 {
                     var variables = viewPartController.GetVariables();
+                    //var suggestions = new List<string>();
+                    //suggestions.AddRange(
+                    //    regexPatternEntries.GetAutoSuggestEntries(text, variables)
+                    //        .Select(e => e.AutoSuggestString)
+                    //        .Distinct()
+                    //        .OrderByDescending(s => s.Length));
                     return regexPatternEntries.GetAutoSuggestEntries(text, variables);
                 })
                 .ContinueWith(task => 

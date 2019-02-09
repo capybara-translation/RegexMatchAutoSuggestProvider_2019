@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Capybara.EditorPlugin.RegexMASProvider.Models;
-using Capybara.EditorPlugin.RegexMASProvider.View;
+using RegexMASProviderLib.Models;
+using RegexMASProviderLib.View;
 using Sdl.Desktop.IntegrationApi;
 using Sdl.Desktop.IntegrationApi.Extensions;
 using Sdl.FileTypeSupport.Framework.BilingualApi;
