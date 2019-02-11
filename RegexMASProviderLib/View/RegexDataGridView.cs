@@ -1,48 +1,53 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Reflection;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using RegexMASProviderLib.Models;
-using Sdl.TranslationStudioAutomation.IntegrationApi;
 
-namespace Capybara.EditorPlugin.RegexMASProvider
+namespace RegexMASProviderLib.View
 {
-    public partial class RegexMatchAutoSuggestProviderViewPartControl : UserControl
+    public partial class RegexDataGridView : UserControl
     {
-        private RegexPattenEntries _regexPatternEntries;
+        private RegexPatternEntries _regexPatternEntries;
         private Variables _variables;
         private ListChangeNotifier _listChangeNotifier;
+        private TabPageManager _tabPageManager;
 
-        public RegexPattenEntries RegexPattenEntries
+        public RegexDataGridView()
         {
-            get { return _regexPatternEntries; }
-        }
-
-        public Variables Variables
-        {
-            get { return _variables; }
-        }
-
-        public ListChangeNotifier ListChangeNotifier
-        {
-            get { return _listChangeNotifier; }
-        }
-
-        public RegexMatchAutoSuggestProviderViewPartControl()
-        {
-            _regexPatternEntries = new RegexPattenEntries();
-            _regexPatternEntries.Load(Assembly.GetExecutingAssembly());
-            _variables = new Variables();
-            _variables.Load(Assembly.GetExecutingAssembly());
-            _listChangeNotifier = new ListChangeNotifier();
             InitializeComponent();
-            InitializeDataBindings();
-            var editorController = SdlTradosStudio.Application.GetController<EditorController>();
-            editorController.Closed += (sender, args) =>
+            _tabPageManager = new TabPageManager(mainTabControl);
+            ShowRegexTester = false;  // Disable RegexTester by default
+
+            enableSelectedRegexEntriesToolStripMenuItem.Tag = true;
+            disableSelectedRegexEntriesToolStripMenuItem.Tag = false;
+            regexPatternsDataGridView.ContextMenuStrip = regexContextMenuStrip;
+
+            enableSelectedVariableEntriesToolStripMenuItem.Tag = true;
+            disableSelectedVariableEntriesToolStripMenuItem.Tag = false;
+            variablesDataGridView.ContextMenuStrip = variableContextMenuStrip;
+        }
+
+        private bool _showRegexTester;
+        public bool ShowRegexTester
+        {
+            get { return _showRegexTester; }
+            set
             {
-                _regexPatternEntries.Save(Assembly.GetExecutingAssembly());
-                _variables.Save(Assembly.GetExecutingAssembly());
-            };
+                _showRegexTester = value;
+                _tabPageManager.ChangeTabPageVisible(2, value);
+            }
+
+        }
+
+        public void Initialize(RegexPatternEntries regexPatternEntries, Variables variables,
+            ListChangeNotifier listChangeNotifier)
+        {
+            _regexPatternEntries = regexPatternEntries;
+            _variables = variables;
+            _listChangeNotifier = listChangeNotifier;
+            InitializeDataBindings();
         }
 
         private void InitializeDataBindings()
@@ -188,6 +193,61 @@ namespace Capybara.EditorPlugin.RegexMASProvider
         private void regexPatternEntryBindingSource_AddingNew(object sender, AddingNewEventArgs e)
         {
             e.NewObject = new RegexPatternEntry();
+        }
+
+        private void testButton_Click(object sender, EventArgs e)
+        {
+
+            var sourceText = sourceTextBox.Text;
+            if (string.IsNullOrEmpty(sourceText))
+            {
+                return;
+            }
+
+            var autoSuggestEntries = _regexPatternEntries.GetAutoSuggestEntries(sourceText, _variables);
+            var popupContent = new PopupWindowContent(autoSuggestEntries);
+            evaluationPopupWindow.SetContent(popupContent);
+        }
+
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            sourceTextBox.Clear();
+        }
+
+        private void enableSelectedRegexEntriesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var enable = (bool) ((ToolStripMenuItem) sender).Tag;
+            var selectedRowIndices = regexPatternsDataGridView.SelectedCells
+                .OfType<DataGridViewCell>()
+                .Where(c => c.RowIndex >= 0)
+                .Select(c => c.RowIndex)
+                .Distinct();
+            foreach (var index in selectedRowIndices)
+            {
+                var entry = regexPatternsDataGridView.Rows[index].DataBoundItem as RegexPatternEntry;
+                if (entry != null)
+                {
+                    entry.IsEnabled = enable;
+                }
+            }
+        }
+
+        private void enableSelectedVariableEntriesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var enable = (bool) ((ToolStripMenuItem) sender).Tag;
+            var selectedRowIndices = variablesDataGridView.SelectedCells
+                .OfType<DataGridViewCell>()
+                .Where(c => c.RowIndex >= 0)
+                .Select(c => c.RowIndex)
+                .Distinct();
+            foreach (var index in selectedRowIndices)
+            {
+                var entry = variablesDataGridView.Rows[index].DataBoundItem as Variable;
+                if (entry != null)
+                {
+                    entry.IsEnabled = enable;
+                }
+            }
         }
     }
 }

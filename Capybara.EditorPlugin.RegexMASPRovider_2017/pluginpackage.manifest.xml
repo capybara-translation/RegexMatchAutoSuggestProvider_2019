@@ -4,7 +4,7 @@
   <Version>1.6</Version>
   <Description>Capybara.EditorPlugin.RegexMASProvider</Description>
   <Author>Capybara Translation</Author>
-  <RequiredProduct name="SDLTradosStudio" minversion="11.0" maxversion="15.0" />
+  <RequiredProduct name="SDLTradosStudio" minversion="12.0" maxversion="15.0" />
   <Include>
     <File>RegexMASProviderLib.dll</File>
   </Include>

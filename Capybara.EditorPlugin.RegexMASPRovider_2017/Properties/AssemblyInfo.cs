@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Capybara.EditorPlugin.RegexMASPRovider_2017")]
+[assembly: AssemblyTitle("Capybara.EditorPlugin.RegexMASProvider_2017")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Capybara.EditorPlugin.RegexMASPRovider_2017")]
+[assembly: AssemblyProduct("Capybara.EditorPlugin.RegexMASProvider_2017")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

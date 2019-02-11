@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegexMASProviderLib", "Rege
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegexMASProviderLibTestApp", "RegexMASProviderLibTestApp\RegexMASProviderLibTestApp.csproj", "{435CAB55-F388-472F-B14E-00BC80886486}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capybara.EditorPlugin.RegexMASPRovider_2017", "Capybara.EditorPlugin.RegexMASPRovider_2017\Capybara.EditorPlugin.RegexMASPRovider_2017.csproj", "{F089A8CF-4338-48A4-9C45-6A1DCCFF9190}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capybara.EditorPlugin.RegexMASProvider_2017", "Capybara.EditorPlugin.RegexMASProvider_2017\Capybara.EditorPlugin.RegexMASProvider_2017.csproj", "{F089A8CF-4338-48A4-9C45-6A1DCCFF9190}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

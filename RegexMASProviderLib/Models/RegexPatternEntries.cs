@@ -10,9 +10,8 @@ using RegexMASProviderLib.Common;
 
 namespace RegexMASProviderLib.Models
 {
-    public class RegexPattenEntries : ModelBase
+    public class RegexPatternEntries : ModelBase
     {
-        private static readonly string FileNameSuffix = ".settings.xml";
 
         private BindingList<RegexPatternEntry> _entries;
 
@@ -26,14 +25,13 @@ namespace RegexMASProviderLib.Models
             }
         }
 
-        public RegexPattenEntries()
+        public RegexPatternEntries()
         {
             Entries = new BindingList<RegexPatternEntry>();
         }
 
-        public void Load(Assembly assembly = null)
+        public void Load(string path)
         {
-            var path = Utils.GetSettingsPath(FileNameSuffix, assembly);
             if (!File.Exists(path))
             {
                 return;
@@ -56,9 +54,8 @@ namespace RegexMASProviderLib.Models
             }
         }
 
-        public void Save(Assembly assembly = null)
+        public void Save(string path)
         {
-            var path = Utils.GetSettingsPath(FileNameSuffix, assembly);
             var doc = new XDocument(
                 new XDeclaration("1.0", "utf-8", "true"),
                 new XElement("RegexMatchAutoSuggestProvider",
@@ -191,13 +188,13 @@ namespace RegexMASProviderLib.Models
                 {
                     continue;
                 }
-                finalMatchPattern = finalMatchPattern.ReplaceFirst($"#{groupName}#", $"{pair.Target}");
+                finalMatchPattern = finalMatchPattern.ReplaceFirst($"#{groupName}#", Regex.Escape(pair.Target));
 
                 var beforeLen = entireValue.Length;
                 entireValue = entireValue.Remove(group.Index - match.Index - diff, group.Length);
                 entireValue = entireValue.Insert(group.Index - match.Index - diff, $"{pair.Target}");
                 var afterLen = entireValue.Length;
-                diff = beforeLen - afterLen;
+                diff += beforeLen - afterLen;
             }
 
 

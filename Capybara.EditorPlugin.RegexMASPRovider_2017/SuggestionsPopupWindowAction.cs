@@ -10,7 +10,7 @@ using Sdl.FileTypeSupport.Framework.BilingualApi;
 using Sdl.TranslationStudioAutomation.IntegrationApi;
 using Sdl.TranslationStudioAutomation.IntegrationApi.Presentation.DefaultLocations;
 
-namespace Capybara.EditorPlugin.RegexMASPRovider_2017
+namespace Capybara.EditorPlugin.RegexMASProvider_2017
 {
     [Action("SuggestionsPopupWindowAction", typeof (EditorController), Name = "SuggestionsPopupWindowAction_Name",
         Description = "SuggestionsPopupWindowAction_Description", Icon = "RegexMASProvider_Icon")]
@@ -74,7 +74,7 @@ namespace Capybara.EditorPlugin.RegexMASPRovider_2017
             {
                 return;
             }
-            var regexPatternEntries = viewPartController.GetRegexPattenEntries();
+            var regexPatternEntries = viewPartController.RegexPatternEntries;
             if (regexPatternEntries == null)
             {
                 return;
@@ -100,13 +100,7 @@ namespace Capybara.EditorPlugin.RegexMASPRovider_2017
             Task<List<AutoSuggestEntry>>.Factory.StartNew(
                 () =>
                 {
-                    var variables = viewPartController.GetVariables();
-                    //var suggestions = new List<string>();
-                    //suggestions.AddRange(
-                    //    regexPatternEntries.GetAutoSuggestEntries(text, variables)
-                    //        .Select(e => e.AutoSuggestString)
-                    //        .Distinct()
-                    //        .OrderByDescending(s => s.Length));
+                    var variables = viewPartController.Variables;
                     return regexPatternEntries.GetAutoSuggestEntries(text, variables);
                 })
                 .ContinueWith(task => 

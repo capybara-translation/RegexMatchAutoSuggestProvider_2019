@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Reflection;
 using System.Windows.Forms;
+using RegexMASProviderLib.Common;
 using RegexMASProviderLib.Models;
+using RegexMASProviderLib.View;
 using Sdl.Desktop.IntegrationApi;
 using Sdl.Desktop.IntegrationApi.Extensions;
 using Sdl.TranslationStudioAutomation.IntegrationApi;
@@ -23,24 +26,59 @@ namespace Capybara.EditorPlugin.RegexMASProvider
 
         protected override void Initialize()
         {
+            var executingAssembly = Assembly.GetExecutingAssembly();
+
+            // Load regex entries
+            var regexFileExtension = ".settings.xml";
+            var regexFilePath = Utils.GetSettingsPath(regexFileExtension, executingAssembly);
+            _regexPatternEntries = new RegexPatternEntries();
+            _regexPatternEntries.Load(regexFilePath);
+
+            // Load variable entries
+            var variableFileExtension = ".variables.xml";
+            var variableFilePath = Utils.GetSettingsPath(variableFileExtension, executingAssembly);
+            _variables = new Variables();
+            _variables.Load(variableFilePath);
+            _listChangeNotifier = new ListChangeNotifier();
+            Control.Value.Initialize(_regexPatternEntries, _variables, _listChangeNotifier);
+
+
+            var editorController = SdlTradosStudio.Application.GetController<EditorController>();
+            editorController.Closed += (sender, args) =>
+            {
+                _regexPatternEntries.Save(regexFilePath);
+                _variables.Save(variableFilePath);
+            };
             
         }
-        
-        public RegexPattenEntries GetRegexPattenEntries()
+
+
+        private RegexPatternEntries _regexPatternEntries;
+
+        public RegexPatternEntries RegexPatternEntries
         {
-            return Control.Value.RegexPattenEntries;
+            get { return _regexPatternEntries; }
         }
 
-        public Variables GetVariables()
+        private Variables _variables;
+
+        public Variables Variables
         {
-            return Control.Value.Variables;
+            get { return _variables; }
         }
 
-        public ListChangeNotifier GetListChangeNotifier()
+        private ListChangeNotifier _listChangeNotifier;
+
+        public ListChangeNotifier ListChangeNotifier
         {
-            return Control.Value.ListChangeNotifier;
+            get { return _listChangeNotifier; }
         }
 
-        private static readonly Lazy<RegexMatchAutoSuggestProviderViewPartControl> Control = new Lazy<RegexMatchAutoSuggestProviderViewPartControl>(() => new RegexMatchAutoSuggestProviderViewPartControl());  
+
+        private static readonly Lazy<RegexDataGridView> Control = 
+            new Lazy<RegexDataGridView>(() =>
+        {
+            return new RegexDataGridView();
+        });  
     }
 }

@@ -10,7 +10,6 @@ namespace RegexMASProviderLib.Models
 {
     public class Variables : ModelBase
     {
-        private static readonly string FileNameSuffix = ".variables.xml";
 
         public Variables()
         {
@@ -42,9 +41,8 @@ namespace RegexMASProviderLib.Models
             }
         }
 
-        public void Load(Assembly assembly = null)
+        public void Load(string path)
         {
-            var path = Utils.GetSettingsPath(FileNameSuffix, assembly);
             if (!File.Exists(path))
             {
                 return;
@@ -69,9 +67,8 @@ namespace RegexMASProviderLib.Models
             }
         }
 
-        public void Save(Assembly assembly = null)
+        public void Save(string path)
         {
-            var path = Utils.GetSettingsPath(FileNameSuffix, assembly);
             var doc = new XDocument(
                 new XDeclaration("1.0", "utf-8", "true"),
                 new XElement("RegexMatchAutoSuggestProvider",

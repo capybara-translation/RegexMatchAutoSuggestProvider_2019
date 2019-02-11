@@ -55,7 +55,7 @@
     <Compile Include="Common\Utils.cs" />
     <Compile Include="Models\AutoSuggestEntry.cs" />
     <Compile Include="Models\ListChangeNotifier.cs" />
-    <Compile Include="Models\RegexPattenEntries.cs" />
+    <Compile Include="Models\RegexPatternEntries.cs" />
     <Compile Include="Models\RegexPatternEntry.cs" />
     <Compile Include="Models\TranslationPair.cs" />
     <Compile Include="Models\Variable.cs" />
@@ -78,13 +78,20 @@
     </Compile>
     <Compile Include="View\PopupToolStripController.cs" />
     <Compile Include="View\PopupWindowContent.cs" />
+    <Compile Include="View\RegexDataGridView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\RegexDataGridView.Designer.cs">
+      <DependentUpon>RegexDataGridView.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\SuggestionsPopupWindow.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="View\SuggestionsPopupWindow.Designer.cs">
       <DependentUpon>SuggestionsPopupWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Xhtml.cs" />
+    <Compile Include="Common\Xhtml.cs" />
+    <Compile Include="View\TabPageManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -93,6 +100,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\EvaluationPopupWindow.resx">
       <DependentUpon>EvaluationPopupWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\RegexDataGridView.resx">
+      <DependentUpon>RegexDataGridView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\SuggestionsPopupWindow.resx">
       <DependentUpon>SuggestionsPopupWindow.cs</DependentUpon>

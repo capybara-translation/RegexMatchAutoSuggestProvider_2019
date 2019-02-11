@@ -8,7 +8,7 @@ using Sdl.TranslationStudioAutomation.IntegrationApi;
 using Sdl.TranslationStudioAutomation.IntegrationApi.AutoSuggest;
 using Sdl.TranslationStudioAutomation.IntegrationApi.Extensions;
 
-namespace Capybara.EditorPlugin.RegexMASPRovider_2017
+namespace Capybara.EditorPlugin.RegexMASProvider_2017
 {
     [AutoSuggestProvider(Id = "RegexMatchAutoSuggestProvider", Name = "RegexMatchAutoSuggestProvider",
         Description = "AutoSuggest provider for copying the source words that match the specified regular expressions",
@@ -16,7 +16,7 @@ namespace Capybara.EditorPlugin.RegexMASPRovider_2017
     public class RegexMatchAutoSuggestProvider : AbstractAutoSuggestProvider
     {
         private List<string> _candidates;
-        private RegexPattenEntries _regexPatternEntries;
+        private RegexPatternEntries _regexPatternEntries;
         private Variables _variables;
         private ListChangeNotifier _listChangeNotifier;
         private RegexMatchAutoSuggestProviderViewPartController _viewPartController;
@@ -27,10 +27,10 @@ namespace Capybara.EditorPlugin.RegexMASPRovider_2017
                 SdlTradosStudio.Application.GetController<RegexMatchAutoSuggestProviderViewPartController>();
             if (_viewPartController != null)
             {
-                _regexPatternEntries = _viewPartController.GetRegexPattenEntries();
-                _variables = _viewPartController.GetVariables();
+                _regexPatternEntries = _viewPartController.RegexPatternEntries;
+                _variables = _viewPartController.Variables;
 
-                _listChangeNotifier = _viewPartController.GetListChangeNotifier();
+                _listChangeNotifier = _viewPartController.ListChangeNotifier;
                 _listChangeNotifier.Changed += _listChangeNotifier_Changed;
             }
         }
@@ -52,15 +52,15 @@ namespace Capybara.EditorPlugin.RegexMASPRovider_2017
             {
                 if (_regexPatternEntries == null)
                 {
-                    _regexPatternEntries = _viewPartController.GetRegexPattenEntries();
+                    _regexPatternEntries = _viewPartController.RegexPatternEntries;
                 }
                 if (_variables == null)
                 {
-                    _variables = _viewPartController.GetVariables();
+                    _variables = _viewPartController.Variables;
                 }
                 if (_listChangeNotifier == null)
                 {
-                    _listChangeNotifier = _viewPartController.GetListChangeNotifier();
+                    _listChangeNotifier = _viewPartController.ListChangeNotifier;
                     _listChangeNotifier.Changed += _listChangeNotifier_Changed;
                 }
                 InitializeCandidates();

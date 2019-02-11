@@ -85,5 +85,9 @@
       <Name>RegexMASProviderLib</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="TestFiles\regex.xml" />
+    <Content Include="TestFiles\variables.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

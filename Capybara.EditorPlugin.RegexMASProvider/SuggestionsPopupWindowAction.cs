@@ -74,7 +74,7 @@ namespace Capybara.EditorPlugin.RegexMASProvider
             {
                 return;
             }
-            var regexPatternEntries = viewPartController.GetRegexPattenEntries();
+            var regexPatternEntries = viewPartController.RegexPatternEntries;
             if (regexPatternEntries == null)
             {
                 return;
@@ -100,7 +100,7 @@ namespace Capybara.EditorPlugin.RegexMASProvider
             Task<List<AutoSuggestEntry>>.Factory.StartNew(
                 () =>
                 {
-                    var variables = viewPartController.GetVariables();
+                    var variables = viewPartController.Variables;
                     //var suggestions = new List<string>();
                     //suggestions.AddRange(
                     //    regexPatternEntries.GetAutoSuggestEntries(text, variables)

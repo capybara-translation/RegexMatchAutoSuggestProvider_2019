@@ -115,7 +115,9 @@ namespace RegexMASProviderLib.Models
             }
         }
 
-
-        
+        public override string ToString()
+        {
+            return $"{RegexPattern} - {ReplacePattern}";
+        }
     }
 }
