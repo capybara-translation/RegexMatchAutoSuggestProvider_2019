@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using RegexMASProviderLib.Common;
@@ -120,12 +119,12 @@ namespace RegexMASProviderLib.Models
                 foreach (var pattern in Entries.Where(e => e.IsEnabled && !e.HasErrors))
                 {
                     var intermediateRegex = ConstructIntermediateRegex(validVariables, pattern.RegexPattern);
-                    var r = new Regex(intermediateRegex.ConcatenatedFindPattern, RegexOptions.IgnoreCase);
+                    var r = new Regex(intermediateRegex.ConcatenatedFindPattern);
                     //foreach (Match initialMatch in Regex.Matches(text, intermediateRegex.ConcatenatedFindPattern, RegexOptions.IgnoreCase))
                     foreach (Match initialMatch in r.Matches(text))
                     {
                         var finalRegex = ConstructFinalRegex(r, initialMatch, intermediateRegex);
-                        foreach (Match finalMatch in Regex.Matches(finalRegex.NewSourceText, finalRegex.EvaluatedFindPattern, RegexOptions.IgnoreCase))
+                        foreach (Match finalMatch in Regex.Matches(finalRegex.NewSourceText, finalRegex.EvaluatedFindPattern))
                         {
                             var autoSuggestString = finalMatch.Result(pattern.ReplacePattern).WideToNarrow();
                             results.Add(autoSuggestString);
