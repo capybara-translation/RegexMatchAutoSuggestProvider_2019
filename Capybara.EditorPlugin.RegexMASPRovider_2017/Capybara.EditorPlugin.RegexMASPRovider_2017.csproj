@@ -95,6 +95,7 @@
     <Compile Include="SuggestionsPopupWindowAction.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="RegexMatchAutoSuggestProvider.snk" />
     <None Include="Resources\R.ico" />
     <EmbeddedResource Include="PluginResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -106,7 +107,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="RegexMatchAutoSuggestProvider.snk" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RegexMASProviderLib\RegexMASProviderLib.csproj">

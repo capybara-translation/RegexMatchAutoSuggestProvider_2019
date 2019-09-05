@@ -35,7 +35,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>RegexMatchAutoSuggestProviderLib.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>RegexMatchAutoSuggestProvider.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
@@ -109,7 +109,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="RegexMatchAutoSuggestProviderLib.snk" />
+    <None Include="RegexMatchAutoSuggestProvider.snk" />
     <None Include="Resources\base.css" />
   </ItemGroup>
   <ItemGroup>
