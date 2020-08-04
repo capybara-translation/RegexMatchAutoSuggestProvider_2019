@@ -6,6 +6,7 @@ using RegexMASProviderLib.Models;
 using RegexMASProviderLib.View;
 using Sdl.Desktop.IntegrationApi;
 using Sdl.Desktop.IntegrationApi.Extensions;
+using Sdl.Desktop.IntegrationApi.Interfaces;
 using Sdl.TranslationStudioAutomation.IntegrationApi;
 
 namespace Capybara.EditorPlugin.RegexMASProvider
@@ -19,7 +20,7 @@ namespace Capybara.EditorPlugin.RegexMASProvider
     [ViewPartLayout(typeof(EditorController), Dock = DockType.Bottom)]
     class RegexMatchAutoSuggestProviderViewPartController : AbstractViewPartController
     {
-        protected override Control GetContentControl()
+        protected override IUIControl GetContentControl()
         {
             return Control.Value;
         }

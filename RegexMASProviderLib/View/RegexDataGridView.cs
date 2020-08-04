@@ -3,10 +3,11 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using RegexMASProviderLib.Models;
+using Sdl.Desktop.IntegrationApi.Interfaces;
 
 namespace RegexMASProviderLib.View
 {
-    public partial class RegexDataGridView : UserControl
+    public partial class RegexDataGridView : UserControl, IUIControl
     {
         private RegexPatternEntries _regexPatternEntries;
         private Variables _variables;
