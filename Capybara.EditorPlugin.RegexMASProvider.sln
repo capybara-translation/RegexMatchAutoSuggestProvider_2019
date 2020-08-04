@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.329
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capybara.EditorPlugin.RegexMASProvider", "Capybara.EditorPlugin.RegexMASProvider\Capybara.EditorPlugin.RegexMASProvider.csproj", "{B0084C6F-4870-4FCC-89CC-61CED10A20DC}"
 EndProject
@@ -13,6 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capybara.EditorPlugin.Regex
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C4CF3AD7-FCF2-4C5F-A2B2-3EBB2DCD779F}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
 		LICENSE.md = LICENSE.md
 		readme.md = readme.md
 		RegexMatchAutoSuggestProvider.snk = RegexMatchAutoSuggestProvider.snk
